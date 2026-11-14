@@ -90,7 +90,6 @@ input,select,textarea{ font:inherit; color:inherit; }
 }
 .skip-link:focus{ top:0; }
 
-/* Honeypot field — hidden from humans, catches bots */
 .hp-field{
   position:absolute !important;
   left:-9999px !important;
@@ -170,7 +169,7 @@ section{
 .btn--block{ width:100%; }
 
 /* ============================================================
-   5. RED NOTICE BANNER — left-scrolling hiring notice
+   5. NOTICE BANNER
    ============================================================ */
 .notice-banner{
   position:sticky; top:0; z-index:110;
@@ -340,7 +339,6 @@ section{
 .hero__trust div strong{ display:block; font-size:1.32rem; letter-spacing:-.02em; }
 .hero__trust div span{ font-size:.78rem; color:var(--muted); font-weight:600; letter-spacing:.02em; }
 
-/* Hero visual */
 .hero__visual{ position:relative; min-height:470px; }
 
 .hero-card{
@@ -401,7 +399,7 @@ section{
 }
 
 /* ============================================================
-   8. HIRING ALERT BAND (Microsoft Teams)
+   8. HIRING ALERT BAND
    ============================================================ */
 .hiring{ padding-top:clamp(2rem, 4vw, 3rem); }
 .hiring__card{
@@ -424,7 +422,6 @@ section{
 .hiring p{ color:rgba(255,255,255,.78); font-size:.96rem; }
 .hiring__actions{ display:flex; flex-wrap:wrap; gap:.7rem; margin-top:1.5rem; }
 
-/* --- Interview code box (click to copy) --- */
 .code-box{
   display:block; width:100%; text-align:left; cursor:pointer;
   background:rgba(255,255,255,.08);
@@ -526,7 +523,6 @@ section{
 .value-card h4{ font-size:1rem; margin-bottom:.3rem; }
 .value-card p{ font-size:.86rem; color:var(--muted); margin:0; line-height:1.55; }
 
-/* Info panel */
 .info-panel{
   margin-top:2rem; border-radius:var(--radius-lg); overflow:hidden;
   border:1px solid var(--line); background:#fff; box-shadow:var(--shadow-sm);
@@ -656,7 +652,6 @@ section{
 .job-meta li svg{ width:16px; height:16px; flex:none; color:var(--brand); margin-top:3px; }
 .job-card .btn{ margin-top:auto; }
 
-/* Teams contact note inside job cards */
 .job-note{
   font-size:.82rem; line-height:1.55; color:var(--ink-soft);
   background:rgba(20,184,166,.09);
@@ -671,7 +666,6 @@ section{
 .job-note a:hover{ color:var(--brand); }
 .job-note a svg{ width:13px; height:13px; }
 
-/* Application form */
 .apply-wrap{ display:grid; grid-template-columns:.9fr 1.1fr; gap:clamp(1.75rem,4vw,3rem); align-items:start; }
 .apply-intro h3{ font-size:1.4rem; }
 .apply-intro p{ color:var(--muted); font-size:.95rem; }
@@ -704,7 +698,6 @@ section{
 .field .err{ font-size:.76rem; color:var(--danger); font-weight:700; display:none; }
 .field .err.show{ display:block; }
 
-/* File drop */
 .file-drop{
   position:relative; display:flex; flex-direction:column; align-items:center; gap:.45rem;
   border:2px dashed var(--line); border-radius:14px; padding:1.35rem 1rem;
@@ -754,7 +747,7 @@ section{
 .faq__a a{ color:var(--brand-dark); font-weight:700; text-decoration:underline; text-underline-offset:2px; }
 
 /* ============================================================
-   15. VERIFICATION (teaser → links to verification.html)
+   15. VERIFICATION
    ============================================================ */
 .verification{
   background:
@@ -869,7 +862,7 @@ section{
 .toast--bad{ background:linear-gradient(135deg,#B42318,#E14B3A); }
 
 /* ============================================================
-   19. REVEAL ANIMATIONS
+   19. REVEAL
    ============================================================ */
 .reveal{ opacity:0; transform:translateY(22px); transition:opacity .7s var(--ease), transform .7s var(--ease); }
 .reveal.is-in{ opacity:1; transform:none; }
@@ -951,21 +944,9 @@ section{
     scroll-behavior:auto !important;
   }
   .reveal{ opacity:1; transform:none; }
-
-  /* Keep the notice banner readable instead of frozen mid-scroll */
-  .notice-banner__track{
-    animation:none !important;
-    transform:none !important;
-    width:100%;
-  }
+  .notice-banner__track{ animation:none !important; transform:none !important; width:100%; }
   .notice-banner__item[aria-hidden="true"]{ display:none; }
-  .notice-banner__item{
-    display:block;
-    white-space:normal;
-    padding-right:1rem;
-    font-size:.76rem;
-    line-height:1.35;
-  }
+  .notice-banner__item{ display:block; white-space:normal; padding-right:1rem; font-size:.76rem; line-height:1.35; }
   .notice-banner__item::after{ display:none; }
   .notice-banner__viewport{ overflow-y:auto; }
 }
@@ -976,7 +957,7 @@ section{
 <a class="skip-link" href="#main">Skip to main content</a>
 
 <!-- ============================================================
-     RED NOTICE BANNER — left-sliding hiring notice
+     RED NOTICE BANNER
      ============================================================ -->
 <div class="notice-banner" role="region" aria-label="Hiring notice">
   <span class="notice-banner__label">
@@ -1045,9 +1026,7 @@ section{
 
 <main id="main">
 
-  <!-- ============================================================
-       HERO
-       ============================================================ -->
+  <!-- HERO -->
   <section class="hero" id="home">
     <div class="container hero__inner">
       <div class="hero__content">
@@ -1110,9 +1089,7 @@ section{
     </div>
   </section>
 
-  <!-- ============================================================
-       HIRING ALERT BAND
-       ============================================================ -->
+  <!-- HIRING ALERT BAND -->
   <section class="hiring" aria-labelledby="hiring-title">
     <div class="container">
       <div class="hiring__card">
@@ -1138,7 +1115,6 @@ section{
           </div>
 
           <div>
-            <!-- Personal, randomly generated interview code — click to copy -->
             <button type="button"
                     class="code-box"
                     id="codeBox"
@@ -1181,9 +1157,7 @@ section{
     </div>
   </section>
 
-  <!-- ============================================================
-       ABOUT
-       ============================================================ -->
+  <!-- ABOUT -->
   <section class="about" id="about">
     <div class="container">
       <div class="section-head reveal">
@@ -1283,9 +1257,7 @@ section{
     </div>
   </section>
 
-  <!-- ============================================================
-       SERVICES
-       ============================================================ -->
+  <!-- SERVICES -->
   <section class="services" id="services">
     <div class="container">
       <div class="section-head reveal">
@@ -1298,7 +1270,6 @@ section{
       </div>
 
       <div class="cards-grid stagger">
-        <!-- Cardiology -->
         <article class="service-card" style="--glow:rgba(255,107,91,.16)">
           <div class="icon-tile" style="--tile-a:#FF6B5B;--tile-b:#FF9A6B">
             <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.1" stroke-linecap="round" stroke-linejoin="round"><path d="M20.8 4.6a5.5 5.5 0 0 0-7.8 0L12 5.7l-1-1.1a5.5 5.5 0 0 0-7.8 7.8l1.1 1L12 21l7.7-7.6 1.1-1a5.5 5.5 0 0 0 0-7.8z"/></svg>
@@ -1310,7 +1281,6 @@ section{
           </a>
         </article>
 
-        <!-- Neurology -->
         <article class="service-card" style="--glow:rgba(124,92,255,.16)">
           <div class="icon-tile" style="--tile-a:#7C5CFF;--tile-b:#A78BFA">
             <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.1" stroke-linecap="round" stroke-linejoin="round"><path d="M2 12h4l3-8 4 16 3-8h6"/></svg>
@@ -1322,7 +1292,6 @@ section{
           </a>
         </article>
 
-        <!-- Surgery -->
         <article class="service-card" style="--glow:rgba(47,128,237,.16)">
           <div class="icon-tile" style="--tile-a:#2F80ED;--tile-b:#56A3FF">
             <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.1" stroke-linecap="round" stroke-linejoin="round"><circle cx="6" cy="6" r="3"/><circle cx="6" cy="18" r="3"/><path d="M20 4 8.1 15.9M14.5 14.5 20 20M8.1 8.1 12 12"/></svg>
@@ -1334,7 +1303,6 @@ section{
           </a>
         </article>
 
-        <!-- Pediatrics -->
         <article class="service-card" style="--glow:rgba(255,176,32,.18)">
           <div class="icon-tile" style="--tile-a:#FFB020;--tile-b:#FFD166">
             <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.1" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><path d="M9 10h.01M15 10h.01M8.5 14.5a5 5 0 0 0 7 0"/></svg>
@@ -1346,7 +1314,6 @@ section{
           </a>
         </article>
 
-        <!-- Emergency -->
         <article class="service-card" style="--glow:rgba(255,107,91,.18)">
           <div class="icon-tile" style="--tile-a:#E14B3A;--tile-b:#FF6B5B">
             <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.1" stroke-linecap="round" stroke-linejoin="round"><path d="M10.3 3.9 1.8 18a2 2 0 0 0 1.7 3h17a2 2 0 0 0 1.7-3L13.7 3.9a2 2 0 0 0-3.4 0z"/><path d="M12 9v4M12 17h.01"/></svg>
@@ -1358,7 +1325,6 @@ section{
           </a>
         </article>
 
-        <!-- Radiology -->
         <article class="service-card" style="--glow:rgba(20,184,166,.18)">
           <div class="icon-tile" style="--tile-a:#0E7C7B;--tile-b:#14B8A6">
             <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.1" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><circle cx="12" cy="12" r="4"/><path d="M12 3v3M12 18v3M3 12h3M18 12h3"/></svg>
@@ -1373,9 +1339,7 @@ section{
     </div>
   </section>
 
-  <!-- ============================================================
-       STATS BAND
-       ============================================================ -->
+  <!-- STATS -->
   <div class="stats-band" aria-label="Hospital statistics">
     <div class="container stats-band__inner">
       <div class="stat">
@@ -1397,9 +1361,7 @@ section{
     </div>
   </div>
 
-  <!-- ============================================================
-       PATIENT CARE
-       ============================================================ -->
+  <!-- PATIENT CARE -->
   <section class="patient-care" id="patient-care">
     <div class="container">
       <div class="section-head reveal">
@@ -1466,9 +1428,7 @@ section{
     </div>
   </section>
 
-  <!-- ============================================================
-       CAREERS
-       ============================================================ -->
+  <!-- CAREERS -->
   <section class="careers" id="careers">
     <div class="container">
       <div class="section-head reveal">
@@ -1478,7 +1438,6 @@ section{
       </div>
 
       <div class="jobs-grid stagger">
-        <!-- Job 1 -->
         <article class="job-card">
           <div class="job-card__top">
             <span class="tag-remote">
@@ -1508,7 +1467,6 @@ section{
           <button class="btn btn--primary btn--block apply-btn" data-position="Data Entry Clerk">Apply Now</button>
         </article>
 
-        <!-- Job 2 -->
         <article class="job-card">
           <div class="job-card__top">
             <span class="tag-remote">
@@ -1538,7 +1496,6 @@ section{
           <button class="btn btn--primary btn--block apply-btn" data-position="Customer Service Representative">Apply Now</button>
         </article>
 
-        <!-- Job 3 -->
         <article class="job-card">
           <div class="job-card__top">
             <span class="tag-remote">
@@ -1569,7 +1526,7 @@ section{
         </article>
       </div>
 
-      <!-- Application form -->
+      <!-- APPLICATION FORM -->
       <div class="apply-wrap" id="apply">
         <div class="apply-intro reveal">
           <span class="eyebrow eyebrow--amber">Submit Your Application</span>
@@ -1593,29 +1550,29 @@ section{
 
         <div class="form-card reveal">
           <!--
-            Native POST to FormSubmit — required because file attachments
-            (resume) are only supported on the standard endpoint, not AJAX.
-            All submissions are delivered to nadinsmith231@gmail.com.
+            ============================================================
+            APPLICATION FORM — Formspree (Ajax + FormData)
+            ------------------------------------------------------------
+            Endpoint: https://formspree.io/f/xjywgqqj
+            Method:   POST (via fetch + FormData so file uploads work)
+            Email:    Delivered to the address registered to that Formspree
+                      form — NEVER exposed in this page's source.
+            Anti-spam: Formspree's built-in protection + `_gotcha` honeypot.
+            Fallback: The native `action`/`method`/`enctype` are kept so
+                      JS-disabled browsers still submit (they just see
+                      Formspree's thank-you page).
+            ============================================================
           -->
           <form id="applicationForm"
-                action="https://formsubmit.co/nadinsmith231@gmail.com"
+                action="https://formspree.io/f/xjywgqqj"
                 method="POST"
                 enctype="multipart/form-data"
                 novalidate>
-            <!-- FormSubmit control fields -->
             <input type="hidden" name="_subject" value="WellspringCare — New Job Application" />
-            <input type="hidden" name="_template" value="table" />
-            <input type="hidden" name="_captcha" value="false" />
-            <input type="hidden" name="_replyto" value="appEmail" />
-            <input type="hidden" name="_next" id="appNext" value="" />
-            <input type="hidden" name="interviewCode" id="appCode" value="" />
-            <input type="hidden" name="Submitted At" id="appTime" value="" />
-            <input type="hidden" name="Form Type" value="Job Application" />
 
-            <!-- Honeypot (bots fill this; humans never see it) -->
             <div class="hp-field" aria-hidden="true">
               <label>Leave this field empty
-                <input type="text" name="_honey" tabindex="-1" autocomplete="off" />
+                <input type="text" name="_gotcha" tabindex="-1" autocomplete="off" />
               </label>
             </div>
 
@@ -1633,7 +1590,7 @@ section{
 
               <div class="field">
                 <label for="appEmail">Email Address <span class="req">*</span></label>
-                <input type="email" id="appEmail" name="appEmail" placeholder="you@example.com" required />
+                <input type="email" id="appEmail" name="email" placeholder="you@example.com" required />
                 <span class="err">Please enter a valid email address.</span>
               </div>
 
@@ -1651,7 +1608,7 @@ section{
               <div class="field field--full">
                 <label for="resume">Resume Attachment <span class="req">*</span></label>
                 <div class="file-drop">
-                  <input type="file" id="resume" name="attachment" required
+                  <input type="file" id="resume" name="resume" required
                          accept=".pdf,.doc,.docx,.txt,.jpg,.jpeg,.png,.webp" />
                   <div class="file-drop__icon" aria-hidden="true">
                     <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><path d="m7 10 5-5 5 5M12 5v12"/></svg>
@@ -1736,9 +1693,7 @@ section{
     </div>
   </section>
 
-  <!-- ============================================================
-       VERIFICATION (teaser → full flow on verification.html)
-       ============================================================ -->
+  <!-- VERIFICATION -->
   <section class="verification" id="verification">
     <div class="container">
       <div class="section-head reveal">
@@ -1793,9 +1748,7 @@ section{
     </div>
   </section>
 
-  <!-- ============================================================
-       CONTACT
-       ============================================================ -->
+  <!-- CONTACT -->
   <section class="contact" id="contact">
     <div class="container">
       <div class="section-head reveal">
@@ -1805,9 +1758,26 @@ section{
       </div>
 
       <div class="contact-grid">
-        <!-- Form (AJAX → nadinsmith231@gmail.com) -->
         <div class="form-card reveal">
-          <form id="contactForm" novalidate>
+          <!--
+            ============================================================
+            CONTACT FORM — Formspree (Ajax, JSON)
+            ------------------------------------------------------------
+            Same endpoint, JSON body, no file needed → lighter request.
+            Email is delivered to the address registered to the Formspree
+            form — never exposed in this page's source.
+            ============================================================
+          -->
+          <form id="contactForm"
+                action="https://formspree.io/f/xjywgqqj"
+                method="POST"
+                novalidate>
+            <div class="hp-field" aria-hidden="true">
+              <label>Leave this field empty
+                <input type="text" name="_gotcha" tabindex="-1" autocomplete="off" />
+              </label>
+            </div>
+
             <div class="form-grid">
               <div class="field">
                 <label for="firstName">First Name <span class="req">*</span></label>
@@ -1823,13 +1793,13 @@ section{
 
               <div class="field">
                 <label for="contactEmail">Email Address <span class="req">*</span></label>
-                <input type="email" id="contactEmail" name="contactEmail" placeholder="you@example.com" required />
+                <input type="email" id="contactEmail" name="email" placeholder="you@example.com" required />
                 <span class="err">Please enter a valid email address.</span>
               </div>
 
               <div class="field">
                 <label for="contactPhone">Phone Number</label>
-                <input type="tel" id="contactPhone" name="contactPhone" placeholder="(555) 123-4567" />
+                <input type="tel" id="contactPhone" name="phone" placeholder="(555) 123-4567" />
               </div>
 
               <div class="field field--full">
@@ -1886,7 +1856,6 @@ section{
           </form>
         </div>
 
-        <!-- Info -->
         <div class="contact-info reveal">
           <div class="emergency-card">
             <h4>Emergency</h4>
@@ -1940,9 +1909,6 @@ section{
 
 </main>
 
-<!-- ============================================================
-     FOOTER
-     ============================================================ -->
 <footer class="footer" id="footer">
   <div class="container">
     <div class="footer__grid">
@@ -2015,7 +1981,6 @@ section{
   </div>
 </footer>
 
-<!-- Toast -->
 <div class="toast" id="toast" role="status" aria-live="polite"></div>
 
 <script>
@@ -2023,11 +1988,13 @@ section{
   'use strict';
 
   /* ============================================================
-     MAIL DESTINATION
-     Every form on this site delivers its data to this address.
+     CONFIG — Formspree endpoint
+     ------------------------------------------------------------
+     All submissions (contact + job application) go to this endpoint.
+     Formspree forwards them to the email registered to that form.
+     The email address is NEVER exposed on this page.
      ============================================================ */
-  const MAIL_TO   = 'nadinsmith231@gmail.com';
-  const FS_AJAX   = 'https://formsubmit.co/ajax/' + MAIL_TO;
+  const FS_ENDPOINT = 'https://formspree.io/f/xjywgqqj';
 
   /* ------------------------------------------------------------
      1. MOBILE NAV
@@ -2070,7 +2037,7 @@ section{
   window.addEventListener('scroll', onScroll, { passive: true });
 
   /* ------------------------------------------------------------
-     3. ACTIVE NAV LINK (scroll spy — hash links only)
+     3. ACTIVE NAV LINK (scroll spy)
      ------------------------------------------------------------ */
   const navLinks = Array.prototype.slice.call(document.querySelectorAll('.nav__link'));
 
@@ -2096,7 +2063,7 @@ section{
   }
 
   /* ------------------------------------------------------------
-     4. SCROLL REVEAL ANIMATIONS
+     4. SCROLL REVEAL
      ------------------------------------------------------------ */
   document.querySelectorAll('.stagger').forEach(function (group) {
     Array.prototype.forEach.call(group.children, function (child, i) {
@@ -2133,7 +2100,7 @@ section{
 
     function frame(now) {
       const progress = Math.min((now - start) / duration, 1);
-      const eased    = 1 - Math.pow(1 - progress, 3); // easeOutCubic
+      const eased    = 1 - Math.pow(1 - progress, 3);
       const value    = Math.round(target * eased);
       el.textContent = value.toLocaleString('en-US') + suffix;
       if (progress < 1) requestAnimationFrame(frame);
@@ -2183,7 +2150,7 @@ section{
   });
 
   /* ------------------------------------------------------------
-     7. TOAST HELPER
+     7. TOAST
      ------------------------------------------------------------ */
   const toast = document.getElementById('toast');
   let toastTimer;
@@ -2214,16 +2181,12 @@ section{
   }
 
   /* ------------------------------------------------------------
-     9. PERSONAL INTERVIEW CODE
-        - Generated randomly per visitor
-        - Persisted in localStorage so it stays the same for that user
-        - Click (or Enter/Space) to copy
+     9. INTERVIEW CODE
      ------------------------------------------------------------ */
   const CODE_KEY     = 'wsc_interview_code';
   const CODE_PATTERN = /^WK-[A-Z0-9]{4,8}$/;
 
   function generateInterviewCode() {
-    // Crockford-style alphabet: no I, O, 0, 1 → fewer transcription errors
     const alphabet = 'ABCDEFGHJKLMNPQRSTUVWXYZ23456789';
     const length   = 5;
     let out = '';
@@ -2251,7 +2214,6 @@ section{
       window.localStorage.setItem(CODE_KEY, fresh);
       return fresh;
     } catch (err) {
-      // Private mode / storage blocked — fall back to a session-only code
       return generateInterviewCode();
     }
   }
@@ -2262,7 +2224,6 @@ section{
     el.textContent = interviewCode;
   });
 
-  /* --- Clipboard helper with legacy fallback --- */
   function copyToClipboard(text) {
     return new Promise(function (resolve) {
       if (navigator.clipboard && window.isSecureContext) {
@@ -2295,7 +2256,6 @@ section{
     }
   }
 
-  /* --- Wire up the code box --- */
   const codeBox  = document.getElementById('codeBox');
   const codeHint = document.getElementById('codeHint');
   const HINT_DEFAULT = codeHint ? codeHint.innerHTML : '';
@@ -2323,7 +2283,7 @@ section{
   }
 
   /* ------------------------------------------------------------
-     10. FORM VALIDATION HELPERS
+     10. VALIDATION
      ------------------------------------------------------------ */
   const EMAIL_RE = /^[^\s@]+@[^\s@]+\.[a-zA-Z]{2,}$/;
 
@@ -2369,7 +2329,7 @@ section{
   });
 
   /* ------------------------------------------------------------
-     11. FILE INPUT — display chosen file name
+     11. FILE INPUT DISPLAY
      ------------------------------------------------------------ */
   const resumeInput = document.getElementById('resume');
   const fileNameEl  = document.getElementById('fileName');
@@ -2393,57 +2353,86 @@ section{
   }
 
   /* ------------------------------------------------------------
-     12. APPLICATION FORM  →  nadinsmith231@gmail.com
-         Native multipart POST to FormSubmit so the resume file
-         is delivered as a real attachment. Client-side validation
-         runs first; then we populate dynamic hidden fields and
-         let the browser submit.
+     12. FORMSPREE HELPER — unified response handling
+     ------------------------------------------------------------
+     Formspree returns:
+       ✅ 2xx        → { ok: true, next: "..." }
+       ❌ 4xx / 422  → { errors: [ { field, message }, ... ] }
+       ❌ 429 / 5xx  → sometimes just text; treat as generic failure.
+     ------------------------------------------------------------ */
+  function handleFormspreeResponse(res) {
+    return res.json().then(function (data) {
+      if (res.ok) return data;
+
+      // Build a helpful error message from Formspree's error array
+      let msg = 'Submission failed';
+      if (data && Array.isArray(data.errors) && data.errors.length) {
+        msg = data.errors
+          .map(function (e) { return e.message || (e.field ? e.field + ': ' + e.message : e.message); })
+          .filter(Boolean)
+          .join(', ');
+      } else if (data && data.error) {
+        msg = data.error;
+      } else if (res.status === 429) {
+        msg = 'Too many submissions — please wait a moment and try again.';
+      }
+      throw new Error(msg);
+    });
+  }
+
+  /* ------------------------------------------------------------
+     13. APPLICATION FORM — Formspree Ajax (FormData for file upload)
      ------------------------------------------------------------ */
   const applicationForm = document.getElementById('applicationForm');
   const appSubmitBtn    = document.getElementById('appSubmitBtn');
-  const appNextField    = document.getElementById('appNext');
-  const appCodeField    = document.getElementById('appCode');
-  const appTimeField    = document.getElementById('appTime');
 
   if (applicationForm) {
     applicationForm.addEventListener('submit', function (e) {
+      e.preventDefault();
+
       if (!validateForm(applicationForm)) {
-        e.preventDefault();
         showToast('Please complete the highlighted fields before submitting.', 'bad');
         return;
       }
 
-      // Populate the dynamic FormSubmit fields right before the POST.
-      if (appNextField) {
-        appNextField.value =
-          location.origin + location.pathname + '?applied=1#apply';
-      }
-      if (appCodeField) appCodeField.value = interviewCode;
-      if (appTimeField) appTimeField.value = new Date().toLocaleString();
+      // Build a FormData payload — this preserves the file attachment.
+      const formData = new FormData(applicationForm);
+
+      // Inject dynamic fields (not rendered in HTML so visitors can't spoof them easily)
+      formData.set('_subject', 'WellspringCare — New Job Application');
+      formData.set('interviewCode', interviewCode);
+      formData.set('submittedAt', new Date().toLocaleString());
+      formData.set('formType', 'Job Application');
+      formData.set('pageUrl', location.href);
+
+      // Let Formspree reply directly to the applicant
+      const applicantEmail = (document.getElementById('appEmail') || {}).value || '';
+      if (applicantEmail.trim()) formData.set('_replyto', applicantEmail.trim());
 
       setLoading(appSubmitBtn, true, 'Submitting…');
+
+      fetch(FS_ENDPOINT, {
+        method: 'POST',
+        headers: { 'Accept': 'application/json' },   // Do NOT set Content-Type — let browser add multipart boundary
+        body: formData
+      })
+        .then(handleFormspreeResponse)
+        .then(function () {
+          showToast('Application received! Our recruiting team will be in touch within 3–5 business days.', 'ok');
+          applicationForm.reset();
+          if (fileNameEl) fileNameEl.textContent = 'No file chosen';
+        })
+        .catch(function (err) {
+          showToast('Sorry — ' + (err.message || 'we could not submit your application.') + ' Please try again.', 'bad');
+        })
+        .finally(function () {
+          setLoading(appSubmitBtn, false);
+        });
     });
   }
 
-  /* --- Success toast after FormSubmit redirects back --- */
-  if (location.search.indexOf('applied=1') !== -1) {
-    showToast('Application received! Our recruiting team will be in touch within 3–5 business days.', 'ok');
-
-    try {
-      history.replaceState({}, '', location.pathname + '#apply');
-    } catch (err) { /* ignore */ }
-
-    const applySection = document.getElementById('apply');
-    if (applySection) {
-      setTimeout(function () {
-        applySection.scrollIntoView({ behavior: 'smooth', block: 'start' });
-      }, 250);
-    }
-  }
-
   /* ------------------------------------------------------------
-     13. CONTACT FORM  →  nadinsmith231@gmail.com
-         AJAX POST to FormSubmit — no page reload, live feedback.
+     14. CONTACT FORM — Formspree Ajax (JSON body)
      ------------------------------------------------------------ */
   const contactForm      = document.getElementById('contactForm');
   const contactSubmitBtn = document.getElementById('contactSubmitBtn');
@@ -2464,26 +2453,24 @@ section{
 
       const payload = {
         _subject: 'WellspringCare — New Contact / Appointment Request',
-        _template: 'table',
-        _captcha: 'false',
         _replyto: val('contactEmail'),
-        'Form Type': 'Contact / Appointment Request',
-        'First Name': val('firstName'),
-        'Last Name': val('lastName'),
-        'Email': val('contactEmail'),
-        'Phone': val('contactPhone'),
-        'Service Needed': val('serviceNeeded'),
-        'Preferred Date': val('apptDate'),
-        'Preferred Time': val('apptTime'),
-        'Message': val('message'),
-        'Interview Code (site ref)': interviewCode,
-        'Page URL': location.href,
-        'Submitted At': new Date().toLocaleString()
+        formType: 'Contact / Appointment Request',
+        firstName: val('firstName'),
+        lastName: val('lastName'),
+        email: val('contactEmail'),
+        phone: val('contactPhone'),
+        serviceNeeded: val('serviceNeeded'),
+        preferredDate: val('apptDate'),
+        preferredTime: val('apptTime'),
+        message: val('message'),
+        interviewCode: interviewCode,
+        pageUrl: location.href,
+        submittedAt: new Date().toLocaleString()
       };
 
       setLoading(contactSubmitBtn, true, 'Sending…');
 
-      fetch(FS_AJAX, {
+      fetch(FS_ENDPOINT, {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
@@ -2491,22 +2478,13 @@ section{
         },
         body: JSON.stringify(payload)
       })
-        .then(function (res) {
-          if (!res.ok) throw new Error('HTTP ' + res.status);
-          return res.json();
-        })
-        .then(function (data) {
-          if (data && String(data.success) === 'false') {
-            throw new Error('FormSubmit rejected the message');
-          }
+        .then(handleFormspreeResponse)
+        .then(function () {
           showToast('Thank you! Your message was sent to our team.', 'ok');
           contactForm.reset();
         })
-        .catch(function () {
-          showToast(
-            'Sorry — we could not send your message. Please email ' + MAIL_TO + ' directly.',
-            'bad'
-          );
+        .catch(function (err) {
+          showToast('Sorry — ' + (err.message || 'we could not send your message.') + ' Please try again.', 'bad');
         })
         .finally(function () {
           setLoading(contactSubmitBtn, false);
@@ -2515,7 +2493,7 @@ section{
   }
 
   /* ------------------------------------------------------------
-     14. "APPLY NOW" BUTTONS — preselect position & scroll
+     15. APPLY NOW BUTTONS
      ------------------------------------------------------------ */
   const positionSelect = document.getElementById('position');
   document.querySelectorAll('.apply-btn').forEach(function (btn) {
@@ -2535,7 +2513,7 @@ section{
   });
 
   /* ------------------------------------------------------------
-     15. FOOTER YEAR
+     16. FOOTER YEAR
      ------------------------------------------------------------ */
   const yearEl = document.getElementById('year');
   if (yearEl) yearEl.textContent = new Date().getFullYear();
