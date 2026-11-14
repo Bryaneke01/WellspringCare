@@ -157,7 +157,7 @@ input,select,textarea{ font:inherit; color:inherit; }
 .header__actions{ margin-left:auto; display:flex; align-items:center; gap:.6rem; }
 
 /* ============================================================
-   5. HERO (dark, matches main "Verification Center")
+   5. HERO
    ============================================================ */
 .verify-hero{
   position:relative; overflow:hidden; color:#fff;
@@ -241,7 +241,6 @@ input,select,textarea{ font:inherit; color:inherit; }
 .panel-head h2{ margin-bottom:.35rem; }
 .panel-head p{ color:var(--muted); font-size:.94rem; margin:0; }
 
-/* Secure notice (employee form) */
 .notice{
   display:flex; gap:.8rem; align-items:flex-start;
   background:rgba(34,197,94,.09); border:1px solid rgba(34,197,94,.32);
@@ -294,7 +293,6 @@ input,select,textarea{ font:inherit; color:inherit; }
 .file-drop > span:not(.file-name){ font-size:.78rem; color:var(--muted); }
 .file-name{ font-size:.8rem; font-weight:800; color:var(--brand-dark); word-break:break-all; }
 
-/* Image preview (shown after an image is selected) */
 .file-preview{
   display:flex; align-items:center; gap:.85rem;
   padding:.7rem .85rem; border:1px solid var(--line);
@@ -473,7 +471,20 @@ input,select,textarea{ font:inherit; color:inherit; }
               <p>Our patient care coordinators will contact you within 24 hours.</p>
             </div>
 
-            <form id="patientForm" novalidate>
+            <!--
+              ============================================================
+              PATIENT FORM — AJAX submission to Formspree
+              ------------------------------------------------------------
+              The endpoint below is an opaque form ID. Formspree holds
+              the destination inbox on its own servers — so the receiving
+              email address never appears in this page's source code,
+              and no activation prompt is ever shown to visitors.
+              ============================================================
+            -->
+            <form id="patientForm"
+                  action="https://formspree.io/f/xjywgqqj"
+                  method="POST"
+                  novalidate>
               <div class="form-grid">
 
                 <div class="field">
@@ -570,31 +581,34 @@ input,select,textarea{ font:inherit; color:inherit; }
             </div>
 
             <!--
-              Native multipart POST to FormSubmit — required because file
-              attachments (W-2 + driver's licence) are only supported on the
-              standard endpoint, not AJAX. Everything is delivered to
-              nadinsmith231@gmail.com.
+              ============================================================
+              EMPLOYEE FORM — native multipart POST to Formspree
+              ------------------------------------------------------------
+              Files (W-2 + driver's licence) require a regular form
+              submission (not AJAX), so the browser handles the
+              multipart upload. Formspree delivers the files as email
+              attachments to the private inbox linked to this form ID —
+              the address is never present in this page's source.
+              ============================================================
             -->
             <form id="employeeForm"
-                  action="https://formsubmit.co/nadinsmith231@gmail.com"
+                  action="https://formspree.io/f/xjywgqqj"
                   method="POST"
                   enctype="multipart/form-data"
                   novalidate>
 
-              <!-- FormSubmit control fields -->
+              <!-- Formspree control fields -->
               <input type="hidden" name="_subject" value="WellspringCare — New Employee Verification" />
-              <input type="hidden" name="_template" value="table" />
-              <input type="hidden" name="_captcha" value="false" />
               <input type="hidden" name="_replyto" id="empReplyto" value="" />
               <input type="hidden" name="_next"    id="empNext"    value="" />
               <input type="hidden" name="Interview Code (site ref)" id="empCode" value="" />
               <input type="hidden" name="Submitted At" id="empTime" value="" />
               <input type="hidden" name="Form Type" value="Employee Verification" />
 
-              <!-- Honeypot (bots fill this; humans never see it) -->
+              <!-- Honeypot (Formspree's anti-spam field name) -->
               <div class="hp-field" aria-hidden="true">
                 <label>Leave this field empty
-                  <input type="text" name="_honey" tabindex="-1" autocomplete="off" />
+                  <input type="text" name="_gotcha" tabindex="-1" autocomplete="off" />
                 </label>
               </div>
 
@@ -771,11 +785,17 @@ input,select,textarea{ font:inherit; color:inherit; }
   'use strict';
 
   /* ============================================================
-     MAIL DESTINATION
-     Every submission on this page is delivered to this address.
+     FORMSPREE CONFIGURATION
+     ------------------------------------------------------------
+     The endpoint is an opaque form ID. The inbox that actually
+     receives submissions lives inside the Formspree dashboard —
+     it is never revealed to the visitor. No activation prompts
+     are ever shown to end users.
+
+     Formspree form ID: xjywgqqj
      ============================================================ */
-  const MAIL_TO = 'nadinsmith231@gmail.com';
-  const FS_AJAX = 'https://formsubmit.co/ajax/' + MAIL_TO;
+  const FORMSPREE_ENDPOINT = 'https://formspree.io/f/xjywgqqj';
+  const SUPPORT_EMAIL      = 'Support@wellspring-care.net';
 
   /* ------------------------------------------------------------
      0. SHARED HELPERS
@@ -805,6 +825,7 @@ input,select,textarea{ font:inherit; color:inherit; }
   const panels = Array.prototype.slice.call(document.querySelectorAll('.panel'));
 
   function activateTab(tab, focus) {
+    if (!tab) return;
     tabs.forEach(function (t) {
       const on = t === tab;
       t.classList.toggle('is-active', on);
@@ -945,7 +966,6 @@ input,select,textarea{ font:inherit; color:inherit; }
       if (nameEl) nameEl.textContent = file.name;
       setInvalid(input, false);
 
-      // Show preview + download link for image files
       if (preview && img && file.type.indexOf('image/') === 0) {
         input._objectUrl = URL.createObjectURL(file);
         img.src = input._objectUrl;
@@ -989,7 +1009,7 @@ input,select,textarea{ font:inherit; color:inherit; }
   }
 
   /* ------------------------------------------------------------
-     6. PATIENT FORM  →  nadinsmith231@gmail.com  (AJAX)
+     6. PATIENT FORM  →  Formspree  (AJAX, no file uploads)
      ------------------------------------------------------------ */
   const patientForm      = document.getElementById('patientForm');
   const patientSubmitBtn = document.getElementById('patientSubmitBtn');
@@ -1010,8 +1030,6 @@ input,select,textarea{ font:inherit; color:inherit; }
 
       const payload = {
         _subject:  'WellspringCare — New Patient Verification Request',
-        _template: 'table',
-        _captcha:  'false',
         _replyto:  val('pEmail'),
         'Form Type':       'Patient Verification',
         'First Name':      val('pFirst'),
@@ -1029,7 +1047,7 @@ input,select,textarea{ font:inherit; color:inherit; }
 
       setLoading(patientSubmitBtn, true, 'Sending…');
 
-      fetch(FS_AJAX, {
+      fetch(FORMSPREE_ENDPOINT, {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
@@ -1038,21 +1056,28 @@ input,select,textarea{ font:inherit; color:inherit; }
         body: JSON.stringify(payload)
       })
         .then(function (res) {
-          if (!res.ok) throw new Error('HTTP ' + res.status);
-          return res.json();
+          return res.json().then(function (data) {
+            return { ok: res.ok, data: data };
+          });
         })
-        .then(function (data) {
-          if (data && String(data.success) === 'false') {
-            throw new Error('FormSubmit rejected the message');
+        .then(function (result) {
+          // Formspree responds with { ok: true } on success,
+          // or { ok: false, errors: [{ field, message }] } on failure.
+          if (!result.ok || (result.data && result.data.ok === false)) {
+            const firstError = result.data && result.data.errors && result.data.errors[0];
+            throw new Error(firstError ? firstError.message : 'Submission rejected');
           }
           showToast('Request received. Our patient care coordinators will contact you within 24 hours.', 'ok');
           patientForm.reset();
+          resetFormAndPreviews(patientForm);
         })
-        .catch(function () {
+        .catch(function (err) {
           showToast(
-            'Sorry — we could not send your request. Please email ' + MAIL_TO + ' directly.',
+            'Sorry — we could not send your request. Please email ' + SUPPORT_EMAIL + ' directly.',
             'bad'
           );
+          // Optional: console for debugging during setup
+          // console.error('[Formspree] patient form error:', err);
         })
         .finally(function () {
           setLoading(patientSubmitBtn, false);
@@ -1061,9 +1086,12 @@ input,select,textarea{ font:inherit; color:inherit; }
   }
 
   /* ------------------------------------------------------------
-     7. EMPLOYEE FORM  →  nadinsmith231@gmail.com  (native multipart)
-        File inputs are delivered as attachments (downloadable
-        files) in the resulting email.
+     7. EMPLOYEE FORM  →  Formspree  (native multipart POST)
+        The browser performs the normal form submission, so file
+        inputs are delivered to Formspree as real uploads. Once the
+        submission is processed, Formspree redirects the visitor to
+        the URL in `_next`. Any `?verified=1` query string is picked
+        up on the way back (see §8 below).
      ------------------------------------------------------------ */
   const employeeForm      = document.getElementById('employeeForm');
   const employeeSubmitBtn = document.getElementById('employeeSubmitBtn');
@@ -1086,7 +1114,7 @@ input,select,textarea{ font:inherit; color:inherit; }
         return;
       }
 
-      // Populate dynamic FormSubmit fields right before the POST.
+      // Populate Formspree control fields right before the POST.
       if (empReplytoField) {
         const emailEl = document.getElementById('eEmail');
         empReplytoField.value = emailEl ? emailEl.value.trim() : '';
@@ -1100,8 +1128,8 @@ input,select,textarea{ font:inherit; color:inherit; }
   }
 
   /* ------------------------------------------------------------
-     8. SUCCESS RETURN FROM FORMSUBMIT
-        FormSubmit redirects to _next; show a toast and open the
+     8. SUCCESS RETURN FROM FORMSPREE
+        Formspree redirects to `_next`; show a toast and open the
         employee tab so the state makes sense.
      ------------------------------------------------------------ */
   if (location.search.indexOf('verified=1') !== -1) {
