@@ -113,6 +113,7 @@ section{
 
 .section-head{ max-width:740px; margin:0 auto clamp(2.25rem, 4vw, 3.25rem); text-align:center; }
 .section-head p{ color:var(--muted); font-size:1.05rem; margin:0; }
+.section-head--left{ margin-inline:0; text-align:left; }
 
 .eyebrow{
   display:inline-flex; align-items:center; gap:.5rem;
@@ -137,7 +138,6 @@ section{
   padding:.85rem 1.45rem; border-radius:999px; border:1px solid transparent;
   font-weight:700; font-size:.95rem; cursor:pointer; white-space:nowrap;
   transition:transform .25s var(--ease), box-shadow .25s var(--ease), background .25s, color .25s, border-color .25s, opacity .25s;
-  text-decoration:none;
 }
 .btn:hover{ transform:translateY(-2px); }
 .btn:active{ transform:translateY(0); }
@@ -154,7 +154,6 @@ section{
   background:linear-gradient(135deg, #FF6B5B 0%, #FF9A6B 100%);
   color:#fff; box-shadow:0 14px 28px -14px rgba(255,107,91,.95);
 }
-.btn--accent:hover{ box-shadow:0 20px 34px -14px rgba(255,107,91,1); }
 
 .btn--ghost{
   background:#fff; color:var(--ink); border-color:var(--line); box-shadow:var(--shadow-sm);
@@ -232,7 +231,7 @@ section{
 }
 
 /* ============================================================
-   6. HEADER — brand left · nav + actions right
+   6. HEADER  —  brand left · nav + actions right
    ============================================================ */
 .header{
   position:sticky; top:var(--banner-h); z-index:100;
@@ -430,142 +429,28 @@ section{
 .hiring__card::before{
   content:""; position:absolute; width:420px; height:420px; border-radius:50%;
   right:-140px; top:-180px; background:radial-gradient(circle, rgba(20,184,166,.45), transparent 68%);
-  pointer-events:none;
 }
 .hiring__card::after{
   content:""; position:absolute; width:340px; height:340px; border-radius:50%;
   left:-120px; bottom:-180px; background:radial-gradient(circle, rgba(47,128,237,.4), transparent 68%);
-  pointer-events:none;
 }
 .hiring__grid{ position:relative; z-index:2; display:grid; grid-template-columns:1.15fr .85fr; gap:clamp(1.75rem,4vw,3rem); align-items:start; }
 .hiring h2{ color:#fff; font-size:clamp(1.5rem, 2.6vw, 2rem); }
 .hiring p{ color:rgba(255,255,255,.78); font-size:.96rem; }
-.hiring p strong{ color:#7CFFC4; }
-
 .hiring__actions{ display:flex; flex-wrap:wrap; gap:.7rem; margin-top:1.5rem; }
 
-/* ---- Interviewer availability list ---- */
-.interviewers-label{
-  font-size:.7rem;
-  letter-spacing:.16em;
-  text-transform:uppercase;
-  font-weight:800;
-  color:rgba(255,255,255,.55);
-  margin:1.5rem 0 .65rem;
+.hiring__availability-note{
+  display:flex; align-items:flex-start; gap:.55rem;
+  font-size:.82rem; color:rgba(255,255,255,.78);
+  margin:.95rem 0 0; line-height:1.55;
 }
-
-.interviewers{
-  display:grid;
-  gap:.55rem;
-}
-
-.interviewer{
-  display:flex;
-  align-items:center;
-  gap:.85rem;
-  flex-wrap:wrap;
-  padding:.85rem 1rem;
-  background:rgba(255,255,255,.05);
-  border:1px solid rgba(255,255,255,.12);
-  border-radius:14px;
-  transition:background .25s, border-color .25s;
-}
-
-.interviewer--available{
-  background:linear-gradient(120deg, rgba(20,184,166,.18), rgba(47,128,237,.12));
-  border-color:rgba(124,255,196,.35);
-}
-
-.interviewer__avatar{
-  width:38px;
-  height:38px;
-  border-radius:10px;
-  display:grid;
-  place-items:center;
-  font-size:.74rem;
-  font-weight:800;
-  letter-spacing:.02em;
-  flex:none;
-  color:rgba(255,255,255,.75);
-  background:rgba(255,255,255,.1);
-  border:1px solid rgba(255,255,255,.14);
-}
-
-.interviewer--available .interviewer__avatar{
-  color:#052626;
-  background:linear-gradient(135deg,#7CFFC4,#7EE0FF);
-  border-color:transparent;
-  box-shadow:0 0 0 3px rgba(124,255,196,.18);
-}
-
-.interviewer__meta{
-  display:flex;
-  flex-direction:column;
-  gap:.1rem;
-  min-width:0;
-  flex:1;
-}
-
-.interviewer__meta strong{
-  font-size:.92rem;
-  color:#fff;
-  font-weight:700;
-  line-height:1.2;
-}
-
-.interviewer__status{
-  display:inline-flex;
-  align-items:center;
-  gap:.35rem;
-  font-size:.74rem;
-  font-weight:700;
-  letter-spacing:.02em;
-  color:rgba(255,255,255,.6);
-  line-height:1.2;
-}
-
-.interviewer--available .interviewer__status{ color:#7CFFC4; }
-
-.interviewer__dot{
-  width:6px;
-  height:6px;
-  border-radius:50%;
-  background:rgba(255,255,255,.4);
-  flex:none;
-}
-
-.interviewer--available .interviewer__dot{
-  background:#7CFFC4;
-  box-shadow:0 0 0 3px rgba(124,255,196,.25);
+.hiring__availability-note .status-dot{
+  width:8px; height:8px; border-radius:50%; flex:none; margin-top:8px;
+  background:#7CFFC4; box-shadow:0 0 0 3px rgba(124,255,196,.22);
   animation:pulseDot 1.8s infinite;
 }
+.hiring__availability-note strong{ color:#fff; }
 
-.interviewer__action{
-  display:inline-flex;
-  align-items:center;
-  justify-content:center;
-  gap:.35rem;
-  padding:.52rem .95rem;
-  border-radius:999px;
-  font-size:.78rem;
-  font-weight:700;
-  white-space:nowrap;
-  transition:transform .2s, box-shadow .2s;
-  flex:none;
-  text-decoration:none;
-}
-
-.interviewer__action svg{ width:14px; height:14px; flex:none; }
-
-.interviewer__action--disabled{
-  background:rgba(255,255,255,.06);
-  border:1px solid rgba(255,255,255,.1);
-  color:rgba(255,255,255,.42);
-  cursor:not-allowed;
-  font-style:normal;
-}
-
-/* ---- Code box ---- */
 .code-box{
   display:block; width:100%; text-align:left; cursor:pointer;
   background:rgba(255,255,255,.08);
@@ -607,6 +492,73 @@ section{
   background:rgba(124,255,196,.14);
 }
 .code-box.is-copied .code-box__hint{ color:#7CFFC4; }
+
+/* ---- Manager availability chips ---------------------------- */
+.managers-heading{
+  font-size:.72rem; letter-spacing:.15em; text-transform:uppercase;
+  font-weight:800; color:rgba(255,255,255,.6);
+  margin:0 0 .65rem;
+}
+.managers{ display:flex; flex-direction:column; gap:.55rem; margin-bottom:1.25rem; }
+
+.manager-chip{
+  display:flex; align-items:center; gap:.65rem;
+  background:rgba(255,255,255,.08);
+  border:1px solid rgba(255,255,255,.18);
+  padding:.55rem .8rem .55rem .55rem;
+  border-radius:14px;
+  font-size:.86rem; font-weight:700; color:#fff;
+  transition:background .25s, border-color .25s, transform .2s var(--ease);
+}
+.manager-chip__name{ flex:1 1 auto; min-width:0; overflow:hidden; text-overflow:ellipsis; white-space:nowrap; }
+
+.manager-chip i{
+  width:28px; height:28px; border-radius:50%; display:grid; place-items:center; flex:none;
+  font-style:normal; font-size:.7rem; font-weight:800; color:#062A2A;
+  background:linear-gradient(135deg,#7CFFC4,#7EE0FF);
+}
+
+.manager-chip__status{
+  flex:none;
+  display:inline-flex; align-items:center; gap:.35rem;
+  font-size:.62rem; letter-spacing:.1em; text-transform:uppercase;
+  padding:.24rem .55rem; border-radius:999px; font-weight:800;
+  white-space:nowrap;
+}
+.manager-chip__status .dot{
+  width:6px; height:6px; border-radius:50%; background:currentColor;
+}
+
+/* Available → clickable green */
+.manager-chip--available{
+  background:rgba(124,255,196,.14);
+  border-color:rgba(124,255,196,.55);
+  cursor:pointer;
+}
+.manager-chip--available:hover{
+  background:rgba(124,255,196,.24);
+  border-color:#7CFFC4;
+  transform:translateY(-1px);
+}
+.manager-chip--available .manager-chip__status{
+  background:#7CFFC4; color:#062A2A;
+}
+.manager-chip--available .manager-chip__status .dot{
+  animation:pulseDot 1.8s infinite;
+}
+.manager-chip__arrow{
+  width:14px; height:14px; flex:none;
+  color:#7CFFC4; opacity:.9;
+}
+
+/* Busy / Occupied → muted, non-interactive */
+.manager-chip--busy{
+  opacity:.62;
+  cursor:not-allowed;
+}
+.manager-chip--busy .manager-chip__status{
+  background:rgba(255,176,32,.28); color:#FFD98A;
+}
 
 .warn{
   display:flex; gap:.8rem; align-items:flex-start;
@@ -1002,17 +954,21 @@ section{
 /* ============================================================
    20. RESPONSIVE — CONTENT-DRIVEN BREAKPOINT LADDER
    ============================================================ */
+
+/* ---- ≥1440px — Large desktop ------------------------------- */
 @media (min-width:1440px){
   :root{ --max:1280px; }
   .hero__visual{ min-height:520px; }
   .hero-card__art{ height:210px; }
 }
 
+/* ---- 1024–1199px — Small desktop --------------------------- */
 @media (max-width:1199px){
   .header__phone{ display:none; }
   .nav__link{ padding:.5rem .6rem; font-size:.86rem; }
 }
 
+/* ---- 900–1023px — Tablet landscape ------------------------- */
 @media (max-width:1023px){
   :root{ --header-h:68px; }
 
@@ -1070,6 +1026,7 @@ section{
   .float-card--b{ bottom:-16px; right:8px; }
 }
 
+/* ---- 768–899px — Tablet portrait --------------------------- */
 @media (max-width:899px){
   .cards-grid,
   .care-grid,
@@ -1082,6 +1039,7 @@ section{
   .form-grid{ grid-template-columns:1fr; }
 }
 
+/* ---- 600–767px — Large phone ------------------------------- */
 @media (max-width:767px){
   :root{ --header-h:64px; }
 
@@ -1091,6 +1049,7 @@ section{
   .hero__trust{ gap:1.25rem; padding-top:1.25rem; }
   .hero__trust div strong{ font-size:1.15rem; }
   .hero__visual{ margin-top:1.5rem; }
+
   .hero-card__art{ height:160px; }
 
   .footer__bottom{ flex-direction:column; align-items:flex-start; gap:.75rem; }
@@ -1098,6 +1057,7 @@ section{
   .notice-banner__item{ font-size:.78rem; padding-right:2.5rem; }
 }
 
+/* ---- 480–599px — Phone ------------------------------------- */
 @media (max-width:599px){
   :root{ --header-h:62px; --banner-h:44px; }
   .container{ width:min(100% - 1.75rem, var(--max)); }
@@ -1119,6 +1079,7 @@ section{
   .hero__cta .btn{ width:100%; }
 
   .footer__grid{ grid-template-columns:1fr; }
+
   .stats-band__inner{ grid-template-columns:repeat(2,1fr); }
 
   .notice-banner__label span{ display:none; }
@@ -1129,8 +1090,12 @@ section{
   .float-card span{ font-size:.66rem; }
   .float-card--a{ top:-10px; right:-6px; left:auto; }
   .float-card--b{ bottom:-12px; right:-6px; }
+
+  .manager-chip{ font-size:.82rem; }
+  .manager-chip__status{ font-size:.58rem; padding:.22rem .45rem; }
 }
 
+/* ---- 360–479px — Small phone ------------------------------- */
 @media (max-width:479px){
   :root{ --header-h:60px; --banner-h:42px; }
 
@@ -1159,11 +1124,11 @@ section{
 
   .section-head h2{ font-size:clamp(1.5rem, 6vw, 2rem); }
 
-  /* Interviewer rows stack action below */
-  .interviewer{ padding:.75rem .85rem; gap:.7rem; }
-  .interviewer__action{ width:100%; }
+  .manager-chip{ padding:.5rem .65rem .5rem .5rem; }
+  .manager-chip__name{ font-size:.8rem; }
 }
 
+/* ---- ≤359px — Very small phone ----------------------------- */
 @media (max-width:359px){
   :root{ --header-h:58px; }
 
@@ -1183,8 +1148,12 @@ section{
   .mini-stat strong{ font-size:1.35rem; }
 
   .float-card{ display:none; }
+
+  .manager-chip{ flex-wrap:wrap; gap:.35rem; }
+  .manager-chip__arrow{ display:none; }
 }
 
+/* ---- Landscape phones (short viewport) --------------------- */
 @media (max-height:520px) and (orientation:landscape) and (max-width:1023px){
   .nav{
     height:calc(100vh - var(--header-h) - var(--banner-h));
@@ -1192,6 +1161,7 @@ section{
   }
 }
 
+/* ---- Touch devices — suppress hover-only animations -------- */
 @media (hover:none) and (pointer:coarse){
   .float-card{ animation:none !important; }
   .btn:hover{ transform:none; }
@@ -1202,6 +1172,7 @@ section{
   .contact-card:hover{ transform:none; }
 }
 
+/* ---- Print ------------------------------------------------ */
 @media print{
   .notice-banner,
   .header,
@@ -1217,6 +1188,7 @@ section{
   .hero{ background:#fff; }
 }
 
+/* ---- Reduced motion --------------------------------------- */
 @media (prefers-reduced-motion:reduce){
   *,*::before,*::after{
     animation-duration:.001ms !important;
@@ -1243,7 +1215,7 @@ section{
 <a class="skip-link" href="#main">Skip to main content</a>
 
 <!-- ============================================================
-     RED NOTICE BANNER
+     RED NOTICE BANNER — reflects live interviewer availability
      ============================================================ -->
 <div class="notice-banner" role="region" aria-label="Hiring notice">
   <span class="notice-banner__label">
@@ -1257,10 +1229,10 @@ section{
   <div class="notice-banner__viewport">
     <div class="notice-banner__track">
       <span class="notice-banner__item">
-        <strong>Hiring notice:</strong> Our official hiring managers are <strong>Carla Bates</strong>, <strong>Robert Zilkoski</strong>, and <strong>Sonnie Griswold</strong>. Interviews are conducted on Microsoft Teams — <strong>Carla Bates is currently the only available interviewer</strong>. Use only the link listed on this site for Carla. Be cautious if anyone using another name—or anyone not listed above—contacts you on Teams claiming to represent WellspringCare.
+        <strong>Hiring notice:</strong> All interviews are held on Microsoft Teams. <strong>Robert Zilkoski</strong> is currently available and accepting interview sessions — <strong>Carla Bates</strong> and <strong>Sonnie Griswold</strong> are fully booked at this time. Use Robert Zilkoski's interview room only. Be cautious of anyone using another name or contacting you outside Microsoft Teams claiming to represent WellspringCare.
       </span>
       <span class="notice-banner__item" aria-hidden="true">
-        <strong>Hiring notice:</strong> Our official hiring managers are <strong>Carla Bates</strong>, <strong>Robert Zilkoski</strong>, and <strong>Sonnie Griswold</strong>. Interviews are conducted on Microsoft Teams — <strong>Carla Bates is currently the only available interviewer</strong>. Use only the link listed on this site for Carla. Be cautious if anyone using another name—or anyone not listed above—contacts you on Teams claiming to represent WellspringCare.
+        <strong>Hiring notice:</strong> All interviews are held on Microsoft Teams. <strong>Robert Zilkoski</strong> is currently available and accepting interview sessions — <strong>Carla Bates</strong> and <strong>Sonnie Griswold</strong> are fully booked at this time. Use Robert Zilkoski's interview room only. Be cautious of anyone using another name or contacting you outside Microsoft Teams claiming to represent WellspringCare.
       </span>
     </div>
   </div>
@@ -1390,7 +1362,9 @@ section{
     </div>
   </section>
 
-  <!-- HIRING ALERT BAND -->
+  <!-- ============================================================
+       HIRING ALERT BAND — only Robert Zilkoski is available
+       ============================================================ -->
   <section class="hiring" aria-labelledby="hiring-title">
     <div class="container">
       <div class="hiring__card">
@@ -1399,67 +1373,27 @@ section{
             <span class="eyebrow eyebrow--light">Careers · Remote Roles</span>
             <h2 id="hiring-title">Interviewing for a remote position?</h2>
             <p>
-              To be interviewed for one of our open remote roles, connect with our hiring managers
-              on Microsoft Teams. <strong>Carla Bates is available now</strong> to conduct interviews —
-              <strong>Robert Zilkoski</strong> and <strong>Sonnie Griswold</strong> are currently in session.
-              Use the link below to join Carla's interview room, and keep your interview code ready.
+              All interviews for our remote roles are conducted on Microsoft Teams. Robert Zilkoski
+              currently has an open interview room and is accepting new sessions. Carla Bates and
+              Sonnie Griswold are fully booked at this time and cannot accept new interviews.
+              Please join Robert's interview room using the button below, and keep your interview
+              code ready — the HR manager will ask for it during the interview.
             </p>
 
-            <p class="interviewers-label">Hiring managers — availability</p>
-
-            <div class="interviewers">
-              <!-- Available interviewer (Carla Bates) — only active Teams link -->
-              <div class="interviewer interviewer--available">
-                <span class="interviewer__avatar" aria-hidden="true">CB</span>
-                <div class="interviewer__meta">
-                  <strong>Carla Bates</strong>
-                  <span class="interviewer__status">
-                    <span class="interviewer__dot"></span>
-                    Available now
-                  </span>
-                </div>
-                <a href="https://teams.live.com/l/invite/FEAi9eUkjQ3QD2vMQ?v=g1"
-                   class="btn btn--accent interviewer__action"
-                   target="_blank" rel="noopener noreferrer">
-                  Join Interview
-                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
-                </a>
-              </div>
-
-              <!-- Busy interviewer (Robert Zilkoski) — old link deactivated -->
-              <div class="interviewer interviewer--busy">
-                <span class="interviewer__avatar" aria-hidden="true">RZ</span>
-                <div class="interviewer__meta">
-                  <strong>Robert Zilkoski</strong>
-                  <span class="interviewer__status">
-                    <span class="interviewer__dot"></span>
-                    In session — unavailable
-                  </span>
-                </div>
-                <span class="interviewer__action interviewer__action--disabled" aria-disabled="true">
-                  Unavailable
-                </span>
-              </div>
-
-              <!-- Busy interviewer (Sonnie Griswold) — no active link -->
-              <div class="interviewer interviewer--busy">
-                <span class="interviewer__avatar" aria-hidden="true">SG</span>
-                <div class="interviewer__meta">
-                  <strong>Sonnie Griswold</strong>
-                  <span class="interviewer__status">
-                    <span class="interviewer__dot"></span>
-                    In session — unavailable
-                  </span>
-                </div>
-                <span class="interviewer__action interviewer__action--disabled" aria-disabled="true">
-                  Unavailable
-                </span>
-              </div>
-            </div>
-
             <div class="hiring__actions">
+              <a href="https://teams.live.com/l/invite/FEAi9eUkjQ3QD2vMQ?v=g1"
+                 class="btn btn--accent"
+                 target="_blank" rel="noopener noreferrer">
+                Join Interview — Robert Zilkoski
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
+              </a>
               <a href="#careers" class="btn btn--light">View Open Positions</a>
             </div>
+
+            <p class="hiring__availability-note">
+              <span class="status-dot" aria-hidden="true"></span>
+              <span><strong>Only Robert Zilkoski's room is currently open.</strong> Carla Bates and Sonnie Griswold are fully booked.</span>
+            </p>
           </div>
 
           <div>
@@ -1480,15 +1414,42 @@ section{
               </span>
             </button>
 
+            <p class="managers-heading">Official hiring managers · live availability</p>
+
+            <div class="managers">
+
+              <a class="manager-chip manager-chip--available"
+                 href="https://teams.live.com/l/invite/FEAi9eUkjQ3QD2vMQ?v=g1"
+                 target="_blank" rel="noopener noreferrer">
+                <i aria-hidden="true">RZ</i>
+                <span class="manager-chip__name">Robert Zilkoski</span>
+                <span class="manager-chip__status"><span class="dot" aria-hidden="true"></span>Available</span>
+                <svg class="manager-chip__arrow" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M7 17 17 7M9 7h8v8"/></svg>
+              </a>
+
+              <span class="manager-chip manager-chip--busy" aria-disabled="true">
+                <i aria-hidden="true">CB</i>
+                <span class="manager-chip__name">Carla Bates</span>
+                <span class="manager-chip__status"><span class="dot" aria-hidden="true"></span>Occupied</span>
+              </span>
+
+              <span class="manager-chip manager-chip--busy" aria-disabled="true">
+                <i aria-hidden="true">SG</i>
+                <span class="manager-chip__name">Sonnie Griswold</span>
+                <span class="manager-chip__status"><span class="dot" aria-hidden="true"></span>Occupied</span>
+              </span>
+
+            </div>
+
             <div class="warn">
               <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M10.3 3.9 1.8 18a2 2 0 0 0 1.7 3h17a2 2 0 0 0 1.7-3L13.7 3.9a2 2 0 0 0-3.4 0z"/><path d="M12 9v4M12 17h.01"/></svg>
               <div>
-                <strong>Stay secure:</strong> only the interview link for our available hiring
-                manager (<strong>Carla Bates</strong>) is active right now. Our official hiring
-                managers are Carla Bates, Robert Zilkoski, and Sonnie Griswold — if anyone else
-                contacts you claiming to represent WellspringCare, do not share any information
-                and report it to <a href="mailto:Support@wellspring-care.net">Support@wellspring-care.net</a>
-                before responding. We will never ask for payment, banking details, or gift cards.
+                <strong>Stay cautious:</strong> we only interview on Microsoft Teams and only with the
+                managers named above. Robert Zilkoski is the only manager with an open interview room —
+                if anyone else, or anyone using a different name, contacts you claiming to represent
+                WellspringCare, do not share any information and report it to
+                <a href="mailto:Support@wellspring-care.net">Support@wellspring-care.net</a> before responding.
+                We will never ask for payment, banking details, or gift cards.
               </div>
             </div>
           </div>
@@ -1798,8 +1759,8 @@ section{
             </li>
           </ul>
           <p class="job-note">
-            To reach the hiring team, message <strong>“interested”</strong> to our available hiring
-            manager (Carla Bates) on
+            To reach the hiring team, message <strong>“interested”</strong> to Robert Zilkoski — the only
+            interviewer currently available — on
             <a href="https://teams.live.com/l/invite/FEAi9eUkjQ3QD2vMQ?v=g1" target="_blank" rel="noopener noreferrer">
               Microsoft Teams
               <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M7 17 17 7M9 7h8v8"/></svg>
@@ -1828,8 +1789,8 @@ section{
             </li>
           </ul>
           <p class="job-note">
-            To reach the hiring team, message <strong>“interested”</strong> to our available hiring
-            manager (Carla Bates) on
+            To reach the hiring team, message <strong>“interested”</strong> to Robert Zilkoski — the only
+            interviewer currently available — on
             <a href="https://teams.live.com/l/invite/FEAi9eUkjQ3QD2vMQ?v=g1" target="_blank" rel="noopener noreferrer">
               Microsoft Teams
               <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M7 17 17 7M9 7h8v8"/></svg>
@@ -1858,8 +1819,8 @@ section{
             </li>
           </ul>
           <p class="job-note">
-            To reach the hiring team, message <strong>“interested”</strong> to our available hiring
-            manager (Carla Bates) on
+            To reach the hiring team, message <strong>“interested”</strong> to Robert Zilkoski — the only
+            interviewer currently available — on
             <a href="https://teams.live.com/l/invite/FEAi9eUkjQ3QD2vMQ?v=g1" target="_blank" rel="noopener noreferrer">
               Microsoft Teams
               <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M7 17 17 7M9 7h8v8"/></svg>
@@ -1878,7 +1839,7 @@ section{
           <ul class="apply-list">
             <li>
               <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 6 9 17l-5-5"/></svg>
-              <span>Interviews are conducted on Microsoft Teams only — with Carla Bates while she is available.</span>
+              <span>Interviews are conducted on Microsoft Teams only — currently with Robert Zilkoski.</span>
             </li>
             <li>
               <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 6 9 17l-5-5"/></svg>
@@ -1975,7 +1936,7 @@ section{
               How do I apply for a remote position?
               <span class="faq__icon" aria-hidden="true"></span>
             </button>
-            <div class="faq__a"><p>Choose a role above and click <strong>Apply Now</strong>, or use the application form on this page. You can also message <strong>“interested”</strong> to our available hiring manager (Carla Bates) directly on <a href="https://teams.live.com/l/invite/FEAi9eUkjQ3QD2vMQ?v=g1" target="_blank" rel="noopener noreferrer">Microsoft Teams</a> to be connected with the team. Attach an up-to-date resume (PDF or DOCX preferred).</p></div>
+            <div class="faq__a"><p>Choose a role above and click <strong>Apply Now</strong>, or use the application form on this page. You can also message <strong>“interested”</strong> to Robert Zilkoski — the only interviewer currently available — directly on <a href="https://teams.live.com/l/invite/FEAi9eUkjQ3QD2vMQ?v=g1" target="_blank" rel="noopener noreferrer">Microsoft Teams</a>. Attach an up-to-date resume (PDF or DOCX preferred).</p></div>
           </div>
 
           <div class="faq__item">
@@ -1999,7 +1960,7 @@ section{
               How are interviews conducted?
               <span class="faq__icon" aria-hidden="true"></span>
             </button>
-            <div class="faq__a"><p>Interviews take place on <strong>Microsoft Teams</strong> only, with our currently available hiring manager <strong>Carla Bates</strong>. Join using the <a href="https://teams.live.com/l/invite/FEAi9eUkjQ3QD2vMQ?v=g1" target="_blank" rel="noopener noreferrer">official Teams interview link</a> and keep your <strong>personal interview code</strong> (shown at the top of this page) ready — Carla will ask for it during the call. <strong>Robert Zilkoski</strong> and <strong>Sonnie Griswold</strong> are currently in session and cannot accept new interviews.</p></div>
+            <div class="faq__a"><p>Interviews take place on <strong>Microsoft Teams</strong> only, with one of our official hiring managers: <strong>Robert Zilkoski</strong>, Carla Bates, or Sonnie Griswold. Robert Zilkoski currently has an open interview room — Carla Bates and Sonnie Griswold are fully booked. Join Robert's room using the <a href="https://teams.live.com/l/invite/FEAi9eUkjQ3QD2vMQ?v=g1" target="_blank" rel="noopener noreferrer">official Teams interview link</a> and keep your <strong>personal interview code</strong> (shown at the top of this page) ready — the HR manager will ask for it during the call.</p></div>
           </div>
 
           <div class="faq__item">
@@ -2007,7 +1968,7 @@ section{
               How can I verify that a message is really from WellspringCare?
               <span class="faq__icon" aria-hidden="true"></span>
             </button>
-            <div class="faq__a"><p>Use the <a href="verification.html">Verification Center</a> to check an interview code, and confirm the sender's name against our official hiring managers. We will never ask for payment, banking details, or gift cards. If anything feels wrong, email <a href="mailto:Support@wellspring-care.net">Support@wellspring-care.net</a> before responding.</p></div>
+            <div class="faq__a"><p>Use the <a href="verification.html">Verification Center</a> to check an interview code, and confirm the sender's name against our official hiring managers. Remember that Robert Zilkoski is the only manager currently accepting interviews — if anyone else contacts you claiming availability, verify before responding. We will never ask for payment, banking details, or gift cards. If anything feels wrong, email <a href="mailto:Support@wellspring-care.net">Support@wellspring-care.net</a> before responding.</p></div>
           </div>
 
           <div class="faq__item">
@@ -2052,7 +2013,7 @@ section{
           <ul class="verify-list">
             <li>
               <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 6 9 17l-5-5"/></svg>
-              <span>Interviews are on <strong>Microsoft Teams only</strong>. Our currently available manager is <strong>Carla Bates</strong> — Robert Zilkoski and Sonnie Griswold are in session and cannot accept new interviews.</span>
+              <span>We interview on <strong>Microsoft Teams only</strong>, with <strong>Robert Zilkoski</strong> (currently available), <strong>Carla Bates</strong>, or <strong>Sonnie Griswold</strong>. Carla and Sonnie are fully booked at this time.</span>
             </li>
             <li>
               <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 6 9 17l-5-5"/></svg>
@@ -2064,13 +2025,13 @@ section{
             </li>
             <li>
               <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 6 9 17l-5-5"/></svg>
-              <span>Only the interview link for <strong>Carla Bates</strong> is active right now. If anyone not on our official list contacts you claiming to represent WellspringCare, <strong>do not share information</strong> — report it to <a href="mailto:Support@wellspring-care.net">Support@wellspring-care.net</a> first.</span>
+              <span>If someone uses a different name or address, <strong>do not share information</strong> — report it to <a href="mailto:Support@wellspring-care.net">Support@wellspring-care.net</a> first.</span>
             </li>
           </ul>
 
           <div class="warn" style="margin-top:1.4rem;">
             <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M10.3 3.9 1.8 18a2 2 0 0 0 1.7 3h17a2 2 0 0 0 1.7-3L13.7 3.9a2 2 0 0 0-3.4 0z"/><path d="M12 9v4M12 17h.01"/></svg>
-            <div>Stay cautious. Anyone not listed above who claims to represent WellspringCare should be reported before you respond.</div>
+            <div>Stay cautious. Anyone outside the three official managers above, or anyone using a different contact channel, should be reported before you respond.</div>
           </div>
         </div>
       </div>
