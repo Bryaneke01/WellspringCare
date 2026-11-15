@@ -113,7 +113,6 @@ section{
 
 .section-head{ max-width:740px; margin:0 auto clamp(2.25rem, 4vw, 3.25rem); text-align:center; }
 .section-head p{ color:var(--muted); font-size:1.05rem; margin:0; }
-.section-head--left{ margin-inline:0; text-align:left; }
 
 .eyebrow{
   display:inline-flex; align-items:center; gap:.5rem;
@@ -138,6 +137,7 @@ section{
   padding:.85rem 1.45rem; border-radius:999px; border:1px solid transparent;
   font-weight:700; font-size:.95rem; cursor:pointer; white-space:nowrap;
   transition:transform .25s var(--ease), box-shadow .25s var(--ease), background .25s, color .25s, border-color .25s, opacity .25s;
+  text-decoration:none;
 }
 .btn:hover{ transform:translateY(-2px); }
 .btn:active{ transform:translateY(0); }
@@ -154,6 +154,7 @@ section{
   background:linear-gradient(135deg, #FF6B5B 0%, #FF9A6B 100%);
   color:#fff; box-shadow:0 14px 28px -14px rgba(255,107,91,.95);
 }
+.btn--accent:hover{ box-shadow:0 20px 34px -14px rgba(255,107,91,1); }
 
 .btn--ghost{
   background:#fff; color:var(--ink); border-color:var(--line); box-shadow:var(--shadow-sm);
@@ -168,15 +169,6 @@ section{
 
 .btn--sm{ padding:.62rem 1.1rem; font-size:.86rem; }
 .btn--block{ width:100%; }
-
-/* Live pulse dot used inside buttons */
-.btn-live-dot{
-  display:inline-block;
-  width:8px; height:8px; border-radius:50%;
-  background:#7CFFC4; flex:none;
-  box-shadow:0 0 0 3px rgba(124,255,196,.28);
-  animation:pulseDot 1.8s infinite;
-}
 
 /* ============================================================
    5. NOTICE BANNER
@@ -269,12 +261,12 @@ section{
 .brand__text strong{ font-size:1.06rem; letter-spacing:-.02em; }
 .brand__text small{ font-size:.68rem; letter-spacing:.18em; text-transform:uppercase; color:var(--muted); font-weight:700; }
 
-/* Right-side cluster */
 .header__end{
   margin-left:auto;
   display:flex; align-items:center; gap:1rem;
   min-width:0;
 }
+
 .header__divider{
   width:1px; height:24px; flex:none;
   background:var(--line);
@@ -301,191 +293,9 @@ section{
 .header__phone svg{ width:17px; height:17px; color:var(--coral); }
 .header__phone span small{ display:block; font-size:.64rem; letter-spacing:.12em; text-transform:uppercase; color:var(--muted); font-weight:800; line-height:1; }
 
-/* ---- Split "Schedule Appointment" button ---- */
-.header__appt{
-  position:relative;
-  display:inline-flex;
-  align-items:stretch;
-  border-radius:999px;
-  box-shadow:0 14px 28px -14px rgba(14,124,123,.95);
-  transition:box-shadow .25s;
-}
-.header__appt:hover{ box-shadow:0 20px 34px -14px rgba(14,124,123,1); }
-.header__appt.is-open{ box-shadow:0 20px 34px -14px rgba(14,124,123,1); }
+.header__cta svg{ display:none; }
+.header__cta-text{ display:inline; }
 
-.header__appt .header__cta{
-  border-radius:999px 0 0 999px;
-  box-shadow:none;
-  padding-right:.75rem;
-  transform:none !important;
-}
-.header__appt-toggle{
-  width:30px;
-  border:none;
-  background:linear-gradient(135deg, var(--brand-dark) 0%, var(--brand) 100%);
-  color:#fff;
-  cursor:pointer;
-  border-radius:0 999px 999px 0;
-  display:grid;
-  place-items:center;
-  padding:0;
-  box-shadow:inset 1px 0 0 rgba(255,255,255,.28);
-  transition:background .2s;
-}
-.header__appt-toggle:hover{ background:linear-gradient(135deg, var(--brand) 0%, var(--brand-light) 100%); }
-.header__appt-toggle svg{ width:13px; height:13px; transition:transform .3s var(--ease); }
-.header__appt-toggle[aria-expanded="true"] svg{ transform:rotate(180deg); }
-
-/* Dropdown menu */
-.header__appt-menu{
-  position:absolute;
-  top:calc(100% + 12px);
-  right:0;
-  width:340px;
-  max-width:calc(100vw - 2rem);
-  background:#fff;
-  border:1px solid var(--line);
-  border-radius:16px;
-  box-shadow:0 30px 60px -22px rgba(10,42,59,.55);
-  padding:.5rem;
-  z-index:250;
-  opacity:0;
-  visibility:hidden;
-  pointer-events:none;
-  transform:translateY(-8px);
-  transition:opacity .22s var(--ease), transform .22s var(--ease), visibility 0s .22s;
-}
-.header__appt.is-open .header__appt-menu{
-  opacity:1;
-  visibility:visible;
-  pointer-events:auto;
-  transform:none;
-  transition:opacity .22s var(--ease), transform .22s var(--ease), visibility 0s;
-}
-
-.appt-menu__label{
-  display:block;
-  font-size:.68rem;
-  font-weight:800;
-  letter-spacing:.14em;
-  text-transform:uppercase;
-  color:var(--muted);
-  padding:.55rem .75rem .35rem;
-}
-.appt-menu__label-row{
-  display:flex; align-items:center; justify-content:space-between;
-  padding-right:.75rem;
-}
-.appt-menu__live{
-  display:inline-flex; align-items:center; gap:.3rem;
-  font-size:.66rem; font-weight:800; letter-spacing:.06em;
-  color:#0B6B3A;
-  text-transform:none;
-}
-.appt-menu__live i{
-  width:6px; height:6px; border-radius:50%;
-  background:#22C55E;
-  box-shadow:0 0 0 3px rgba(34,197,94,.22);
-  font-style:normal;
-  display:inline-block;
-  animation:pulseDot 1.8s infinite;
-}
-
-.appt-menu__item{
-  display:flex;
-  align-items:center;
-  gap:.7rem;
-  padding:.7rem .75rem;
-  border-radius:10px;
-  transition:background .2s;
-  cursor:pointer;
-  text-align:left;
-  width:100%;
-  border:none;
-  background:none;
-  font:inherit;
-  color:inherit;
-  text-decoration:none;
-}
-.appt-menu__item:hover{ background:rgba(20,184,166,.08); }
-.appt-menu__item--busy{
-  cursor:not-allowed;
-  opacity:.62;
-}
-.appt-menu__item--busy:hover{ background:rgba(255,107,91,.06); }
-
-.appt-menu__icon{
-  width:34px; height:34px; flex:none;
-  display:grid; place-items:center;
-  border-radius:10px;
-  background:linear-gradient(135deg, var(--brand), var(--brand-light));
-  color:#fff;
-}
-.appt-menu__icon svg{ width:16px; height:16px; }
-
-.appt-menu__avatar{
-  width:34px; height:34px; flex:none;
-  border-radius:50%;
-  display:grid; place-items:center;
-  font-size:.7rem; font-weight:800;
-  background:linear-gradient(135deg,#7CFFC4,#7EE0FF);
-  color:#062A2A;
-  letter-spacing:.02em;
-}
-.appt-menu__avatar--busy{
-  background:linear-gradient(135deg,#FFD5CB,#FFE4B8);
-  color:#7A2A00;
-}
-
-.appt-menu__body{ min-width:0; flex:1 1 auto; }
-.appt-menu__body strong{
-  display:block;
-  font-size:.88rem;
-  font-weight:800;
-  color:var(--ink);
-  line-height:1.25;
-}
-.appt-menu__body > span{
-  display:block;
-  font-size:.74rem;
-  color:var(--muted);
-  font-weight:600;
-  line-height:1.35;
-  margin-top:2px;
-}
-
-.appt-menu__status{
-  display:inline-flex !important;
-  align-items:center;
-  gap:.35rem;
-  font-size:.72rem !important;
-  font-weight:800 !important;
-  margin-top:3px !important;
-}
-.appt-menu__status i{
-  width:7px; height:7px; border-radius:50%;
-  font-style:normal; display:inline-block;
-  flex:none;
-}
-.appt-menu__status--available{ color:#0B6B3A !important; }
-.appt-menu__status--available i{ background:#22C55E; box-shadow:0 0 0 3px rgba(34,197,94,.22); }
-.appt-menu__status--busy{ color:#B42318 !important; }
-.appt-menu__status--busy i{ background:#FF6B5B; box-shadow:0 0 0 3px rgba(255,107,91,.22); }
-
-.appt-menu__arrow{
-  width:14px; height:14px;
-  margin-left:auto;
-  color:var(--brand);
-  flex:none;
-}
-
-.appt-menu__sep{
-  height:1px;
-  background:var(--line);
-  margin:.35rem .6rem;
-}
-
-/* Hamburger */
 .menu-btn{
   display:none; width:44px; height:44px; border-radius:12px;
   border:1px solid var(--line); background:#fff; cursor:pointer;
@@ -542,7 +352,9 @@ section{
 
 .hero__title{ margin-bottom:1.1rem; }
 .hero__lead{ font-size:clamp(1rem, 1.4vw, 1.12rem); color:var(--ink-soft); max-width:56ch; margin-bottom:1.9rem; }
+
 .hero__cta{ display:flex; flex-wrap:wrap; gap:.8rem; margin-bottom:2.25rem; }
+
 .hero__trust{ display:flex; flex-wrap:wrap; gap:1.75rem; padding-top:1.5rem; border-top:1px dashed rgba(10,42,59,.16); }
 .hero__trust div strong{ display:block; font-size:1.32rem; letter-spacing:-.02em; }
 .hero__trust div span{ font-size:.78rem; color:var(--muted); font-weight:600; letter-spacing:.02em; }
@@ -618,71 +430,142 @@ section{
 .hiring__card::before{
   content:""; position:absolute; width:420px; height:420px; border-radius:50%;
   right:-140px; top:-180px; background:radial-gradient(circle, rgba(20,184,166,.45), transparent 68%);
+  pointer-events:none;
 }
 .hiring__card::after{
   content:""; position:absolute; width:340px; height:340px; border-radius:50%;
   left:-120px; bottom:-180px; background:radial-gradient(circle, rgba(47,128,237,.4), transparent 68%);
+  pointer-events:none;
 }
 .hiring__grid{ position:relative; z-index:2; display:grid; grid-template-columns:1.15fr .85fr; gap:clamp(1.75rem,4vw,3rem); align-items:start; }
 .hiring h2{ color:#fff; font-size:clamp(1.5rem, 2.6vw, 2rem); }
 .hiring p{ color:rgba(255,255,255,.78); font-size:.96rem; }
+.hiring p strong{ color:#7CFFC4; }
+
 .hiring__actions{ display:flex; flex-wrap:wrap; gap:.7rem; margin-top:1.5rem; }
 
-/* Interviewer availability strip */
-.hiring__availability{
+/* ---- Interviewer availability list ---- */
+.interviewers-label{
+  font-size:.7rem;
+  letter-spacing:.16em;
+  text-transform:uppercase;
+  font-weight:800;
+  color:rgba(255,255,255,.55);
+  margin:1.5rem 0 .65rem;
+}
+
+.interviewers{
   display:grid;
-  grid-template-columns:1fr 1fr;
-  gap:.65rem;
-  margin-top:1.35rem;
+  gap:.55rem;
 }
-.avail-card{
-  display:flex; align-items:center; gap:.7rem;
-  padding:.65rem .8rem;
+
+.interviewer{
+  display:flex;
+  align-items:center;
+  gap:.85rem;
+  flex-wrap:wrap;
+  padding:.85rem 1rem;
+  background:rgba(255,255,255,.05);
+  border:1px solid rgba(255,255,255,.12);
   border-radius:14px;
-  background:rgba(255,255,255,.08);
-  border:1px solid rgba(255,255,255,.16);
-  min-width:0;
+  transition:background .25s, border-color .25s;
 }
-.avail-card--available{
-  background:rgba(34,197,94,.12);
+
+.interviewer--available{
+  background:linear-gradient(120deg, rgba(20,184,166,.18), rgba(47,128,237,.12));
   border-color:rgba(124,255,196,.35);
 }
-.avail-card--busy{
-  opacity:.85;
-  background:rgba(255,255,255,.04);
+
+.interviewer__avatar{
+  width:38px;
+  height:38px;
+  border-radius:10px;
+  display:grid;
+  place-items:center;
+  font-size:.74rem;
+  font-weight:800;
+  letter-spacing:.02em;
+  flex:none;
+  color:rgba(255,255,255,.75);
+  background:rgba(255,255,255,.1);
+  border:1px solid rgba(255,255,255,.14);
 }
-.avail-card__avatar{
-  width:34px; height:34px; border-radius:50%; flex:none;
-  display:grid; place-items:center;
-  font-size:.7rem; font-weight:800;
+
+.interviewer--available .interviewer__avatar{
+  color:#052626;
   background:linear-gradient(135deg,#7CFFC4,#7EE0FF);
-  color:#062A2A;
+  border-color:transparent;
+  box-shadow:0 0 0 3px rgba(124,255,196,.18);
 }
-.avail-card--busy .avail-card__avatar{
-  background:linear-gradient(135deg,#FFD5CB,#FFE4B8);
-  color:#7A2A00;
+
+.interviewer__meta{
+  display:flex;
+  flex-direction:column;
+  gap:.1rem;
+  min-width:0;
+  flex:1;
 }
-.avail-card__body{ min-width:0; flex:1 1 auto; }
-.avail-card__body strong{
-  display:block;
-  font-size:.82rem; font-weight:800;
-  color:#fff; line-height:1.2;
-  white-space:nowrap; overflow:hidden; text-overflow:ellipsis;
+
+.interviewer__meta strong{
+  font-size:.92rem;
+  color:#fff;
+  font-weight:700;
+  line-height:1.2;
 }
-.avail-card__status{
-  display:inline-flex; align-items:center; gap:.35rem;
-  font-size:.7rem; font-weight:800;
-  margin-top:2px;
+
+.interviewer__status{
+  display:inline-flex;
+  align-items:center;
+  gap:.35rem;
+  font-size:.74rem;
+  font-weight:700;
+  letter-spacing:.02em;
+  color:rgba(255,255,255,.6);
+  line-height:1.2;
 }
-.avail-card__status i{
-  width:6px; height:6px; border-radius:50%;
+
+.interviewer--available .interviewer__status{ color:#7CFFC4; }
+
+.interviewer__dot{
+  width:6px;
+  height:6px;
+  border-radius:50%;
+  background:rgba(255,255,255,.4);
+  flex:none;
+}
+
+.interviewer--available .interviewer__dot{
+  background:#7CFFC4;
+  box-shadow:0 0 0 3px rgba(124,255,196,.25);
+  animation:pulseDot 1.8s infinite;
+}
+
+.interviewer__action{
+  display:inline-flex;
+  align-items:center;
+  justify-content:center;
+  gap:.35rem;
+  padding:.52rem .95rem;
+  border-radius:999px;
+  font-size:.78rem;
+  font-weight:700;
+  white-space:nowrap;
+  transition:transform .2s, box-shadow .2s;
+  flex:none;
+  text-decoration:none;
+}
+
+.interviewer__action svg{ width:14px; height:14px; flex:none; }
+
+.interviewer__action--disabled{
+  background:rgba(255,255,255,.06);
+  border:1px solid rgba(255,255,255,.1);
+  color:rgba(255,255,255,.42);
+  cursor:not-allowed;
   font-style:normal;
 }
-.avail-card__status--available{ color:#7CFFC4; }
-.avail-card__status--available i{ background:#7CFFC4; box-shadow:0 0 0 3px rgba(124,255,196,.25); animation:pulseDot 1.8s infinite; }
-.avail-card__status--busy{ color:#FFB39A; }
-.avail-card__status--busy i{ background:#FF8F7A; box-shadow:0 0 0 3px rgba(255,143,122,.2); }
 
+/* ---- Code box ---- */
 .code-box{
   display:block; width:100%; text-align:left; cursor:pointer;
   background:rgba(255,255,255,.08);
@@ -724,43 +607,6 @@ section{
   background:rgba(124,255,196,.14);
 }
 .code-box.is-copied .code-box__hint{ color:#7CFFC4; }
-
-.managers{ display:flex; flex-wrap:wrap; gap:.5rem; margin-bottom:1.25rem; }
-.manager-chip{
-  display:inline-flex; align-items:center; gap:.5rem;
-  background:rgba(255,255,255,.1); border:1px solid rgba(255,255,255,.2);
-  padding:.4rem .8rem .4rem .4rem; border-radius:999px; font-size:.8rem; font-weight:700;
-}
-.manager-chip i{
-  width:24px; height:24px; border-radius:50%; display:grid; place-items:center;
-  font-style:normal; font-size:.68rem; font-weight:800; color:#062A2A;
-  background:linear-gradient(135deg,#7CFFC4,#7EE0FF);
-}
-.manager-chip--busy i{
-  background:linear-gradient(135deg,#FFD5CB,#FFE4B8);
-  color:#7A2A00;
-}
-.manager-chip__status{
-  display:inline-flex; align-items:center; gap:.28rem;
-  font-size:.66rem; font-weight:800;
-  padding:.14rem .45rem;
-  border-radius:999px;
-  margin-left:.15rem;
-  letter-spacing:.02em;
-}
-.manager-chip__status i{
-  width:6px; height:6px; border-radius:50%;
-  background:currentColor;
-  display:inline-block;
-}
-.manager-chip__status--available{
-  color:#7CFFC4;
-  background:rgba(124,255,196,.14);
-}
-.manager-chip__status--busy{
-  color:#FFB39A;
-  background:rgba(255,143,122,.16);
-}
 
 .warn{
   display:flex; gap:.8rem; align-items:flex-start;
@@ -951,13 +797,6 @@ section{
 }
 .job-note a:hover{ color:var(--brand); }
 .job-note a svg{ width:13px; height:13px; }
-.job-note .job-note__busy{
-  display:block;
-  margin-top:.35rem;
-  font-size:.76rem;
-  color:#B42318;
-  font-weight:700;
-}
 
 .apply-wrap{ display:grid; grid-template-columns:.9fr 1.1fr; gap:clamp(1.75rem,4vw,3rem); align-items:start; }
 .apply-intro h3{ font-size:1.4rem; }
@@ -1161,9 +1000,8 @@ section{
 .reveal.is-in{ opacity:1; transform:none; }
 
 /* ============================================================
-   20. RESPONSIVE — content-driven breakpoint ladder
+   20. RESPONSIVE — CONTENT-DRIVEN BREAKPOINT LADDER
    ============================================================ */
-
 @media (min-width:1440px){
   :root{ --max:1280px; }
   .hero__visual{ min-height:520px; }
@@ -1181,7 +1019,6 @@ section{
   .header__divider{ display:none; }
   .menu-btn{ display:flex; }
 
-  /* Drawer slides from the right */
   .nav{
     position:absolute;
     top:100%;
@@ -1239,7 +1076,9 @@ section{
   .jobs-grid{ grid-template-columns:repeat(2,1fr); }
 
   .stats-band__inner{ grid-template-columns:repeat(2,1fr); gap:1.75rem; }
+
   .footer__grid{ grid-template-columns:1fr 1fr; }
+
   .form-grid{ grid-template-columns:1fr; }
 }
 
@@ -1254,19 +1093,8 @@ section{
   .hero__visual{ margin-top:1.5rem; }
   .hero-card__art{ height:160px; }
 
-  /* Dropdown becomes full-width fixed under the header */
-  .header__appt-menu{
-    position:fixed;
-    top:calc(var(--banner-h) + var(--header-h) - 2px);
-    left:.75rem;
-    right:.75rem;
-    width:auto;
-    max-width:none;
-    max-height:calc(100vh - var(--banner-h) - var(--header-h) - 1rem);
-    overflow-y:auto;
-  }
-
   .footer__bottom{ flex-direction:column; align-items:flex-start; gap:.75rem; }
+
   .notice-banner__item{ font-size:.78rem; padding-right:2.5rem; }
 }
 
@@ -1280,12 +1108,12 @@ section{
   .care-grid,
   .jobs-grid,
   .values-grid{ grid-template-columns:1fr; }
+
   .form-grid{ grid-template-columns:1fr; }
 
   .mini-stats{ flex-direction:column; }
   .hiring__actions .btn{ width:100%; }
   .code-box__row{ flex-direction:column; align-items:flex-start; gap:.5rem; }
-  .hiring__availability{ grid-template-columns:1fr; }
 
   .hero__cta{ flex-direction:column; }
   .hero__cta .btn{ width:100%; }
@@ -1313,14 +1141,12 @@ section{
 
   .header__actions{ gap:.45rem; }
 
-  /* Split button becomes compact icon-only on the left */
-  .header__appt .header__cta{
+  .header__cta{
     width:42px; height:42px; padding:0;
-    border-radius:999px 0 0 999px;
+    border-radius:50%;
   }
   .header__cta-text{ display:none; }
-  .header__appt .header__cta svg{ display:block; width:20px; height:20px; }
-  .header__appt-toggle{ width:28px; }
+  .header__cta svg{ display:block; width:20px; height:20px; }
 
   .menu-btn{ width:42px; height:42px; border-radius:11px; }
 
@@ -1332,6 +1158,10 @@ section{
   .code-box__label{ font-size:.66rem; }
 
   .section-head h2{ font-size:clamp(1.5rem, 6vw, 2rem); }
+
+  /* Interviewer rows stack action below */
+  .interviewer{ padding:.75rem .85rem; gap:.7rem; }
+  .interviewer__action{ width:100%; }
 }
 
 @media (max-width:359px){
@@ -1341,7 +1171,7 @@ section{
   .brand__mark svg{ width:18px; height:18px; }
   .brand__text strong{ font-size:.92rem; }
 
-  .header__appt{ display:none; }
+  .header__cta{ display:none; }
   .menu-btn{ width:40px; height:40px; border-radius:10px; }
 
   .hero__badges .chip:nth-child(3){ display:none; }
@@ -1427,17 +1257,17 @@ section{
   <div class="notice-banner__viewport">
     <div class="notice-banner__track">
       <span class="notice-banner__item">
-        <strong>Hiring notice:</strong> Our hiring managers are <strong>Carla Bates</strong>, <strong>Robert Zilkoski</strong>, and <strong>Sonnie Griswold</strong>. Interviews are held on Microsoft Teams with these managers only. Be cautious if anyone using another name—or anyone not listed above—contacts you on Teams claiming to represent WellspringCare.
+        <strong>Hiring notice:</strong> Our official hiring managers are <strong>Carla Bates</strong>, <strong>Robert Zilkoski</strong>, and <strong>Sonnie Griswold</strong>. Interviews are conducted on Microsoft Teams — <strong>Carla Bates is currently the only available interviewer</strong>. Use only the link listed on this site for Carla. Be cautious if anyone using another name—or anyone not listed above—contacts you on Teams claiming to represent WellspringCare.
       </span>
       <span class="notice-banner__item" aria-hidden="true">
-        <strong>Hiring notice:</strong> Our hiring managers are <strong>Carla Bates</strong>, <strong>Robert Zilkoski</strong>, and <strong>Sonnie Griswold</strong>. Interviews are held on Microsoft Teams with these managers only. Be cautious if anyone using another name—or anyone not listed above—contacts you on Teams claiming to represent WellspringCare.
+        <strong>Hiring notice:</strong> Our official hiring managers are <strong>Carla Bates</strong>, <strong>Robert Zilkoski</strong>, and <strong>Sonnie Griswold</strong>. Interviews are conducted on Microsoft Teams — <strong>Carla Bates is currently the only available interviewer</strong>. Use only the link listed on this site for Carla. Be cautious if anyone using another name—or anyone not listed above—contacts you on Teams claiming to represent WellspringCare.
       </span>
     </div>
   </div>
 </div>
 
 <!-- ============================================================
-     HEADER — brand left · nav + actions right
+     HEADER — brand left · nav + actions grouped on the right
      ============================================================ -->
 <header class="header" id="header">
   <div class="container header__inner">
@@ -1478,69 +1308,13 @@ section{
           <span>+1 (775) 419-5404<small>24/7 Emergency</small></span>
         </a>
 
-        <!-- Split button: primary action + interviewer-availability dropdown -->
-        <div class="header__appt" id="apptWrap">
-          <a href="#contact" class="btn btn--primary btn--sm header__cta" aria-label="Schedule a medical appointment">
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
-              <rect x="3" y="4" width="18" height="18" rx="2"/>
-              <path d="M16 2v4M8 2v4M3 10h18M9 15l2 2 4-4"/>
-            </svg>
-            <span class="header__cta-text">Schedule Appointment</span>
-          </a>
-          <button type="button"
-                  class="header__appt-toggle"
-                  id="apptToggle"
-                  aria-expanded="false"
-                  aria-haspopup="true"
-                  aria-controls="apptMenu"
-                  aria-label="View available interviewers">
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
-              <path d="m6 9 6 6 6-6"/>
-            </svg>
-          </button>
-
-          <div class="header__appt-menu" id="apptMenu" role="menu" aria-label="Appointment options">
-            <span class="appt-menu__label">Patient Appointment</span>
-            <a href="#contact" class="appt-menu__item" role="menuitem" data-close-menu>
-              <span class="appt-menu__icon" aria-hidden="true">
-                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4" width="18" height="18" rx="2"/><path d="M16 2v4M8 2v4M3 10h18"/></svg>
-              </span>
-              <span class="appt-menu__body">
-                <strong>Book with a doctor</strong>
-                <span>Cardiology, Neurology, Pediatrics &amp; more</span>
-              </span>
-              <svg class="appt-menu__arrow" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
-            </a>
-
-            <div class="appt-menu__sep" role="separator"></div>
-
-            <div class="appt-menu__label-row">
-              <span class="appt-menu__label" style="padding-bottom:.15rem;">Interview Availability · Hiring</span>
-              <span class="appt-menu__live"><i></i>1 available</span>
-            </div>
-
-            <a href="https://teams.live.com/l/invite/FEAi9eUkjQ3QD2vMQ?v=g1"
-               class="appt-menu__item"
-               role="menuitem"
-               target="_blank" rel="noopener noreferrer"
-               data-close-menu>
-              <span class="appt-menu__avatar" aria-hidden="true">CB</span>
-              <span class="appt-menu__body">
-                <strong>Carla Bates</strong>
-                <span class="appt-menu__status appt-menu__status--available"><i></i>Available now</span>
-              </span>
-              <svg class="appt-menu__arrow" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
-            </a>
-
-            <div class="appt-menu__item appt-menu__item--busy" role="menuitem" aria-disabled="true">
-              <span class="appt-menu__avatar appt-menu__avatar--busy" aria-hidden="true">RZ</span>
-              <span class="appt-menu__body">
-                <strong>Robert Zilkoski</strong>
-                <span class="appt-menu__status appt-menu__status--busy"><i></i>Occupied · in session</span>
-              </span>
-            </div>
-          </div>
-        </div>
+        <a href="#contact" class="btn btn--primary btn--sm header__cta" aria-label="Schedule Appointment">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+            <rect x="3" y="4" width="18" height="18" rx="2"/>
+            <path d="M16 2v4M8 2v4M3 10h18M9 15l2 2 4-4"/>
+          </svg>
+          <span class="header__cta-text">Schedule Appointment</span>
+        </a>
 
         <button class="menu-btn" id="menuBtn" aria-expanded="false" aria-controls="nav" aria-label="Open menu">
           <span></span><span></span><span></span>
@@ -1625,39 +1399,66 @@ section{
             <span class="eyebrow eyebrow--light">Careers · Remote Roles</span>
             <h2 id="hiring-title">Interviewing for a remote position?</h2>
             <p>
-              If you'd like to be interviewed for one of our open remote roles, connect with our
-              <strong>available</strong> hiring manager directly on Microsoft Teams. Use the active interview
-              link below to join, and keep your interview code ready — our HR manager will ask you for it
-              during the interview.
+              To be interviewed for one of our open remote roles, connect with our hiring managers
+              on Microsoft Teams. <strong>Carla Bates is available now</strong> to conduct interviews —
+              <strong>Robert Zilkoski</strong> and <strong>Sonnie Griswold</strong> are currently in session.
+              Use the link below to join Carla's interview room, and keep your interview code ready.
             </p>
 
-            <div class="hiring__actions">
-              <a href="https://teams.live.com/l/invite/FEAi9eUkjQ3QD2vMQ?v=g1"
-                 class="btn btn--accent"
-                 target="_blank" rel="noopener noreferrer">
-                <span class="btn-live-dot" aria-hidden="true"></span>
-                Join Teams Interview
-                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
-              </a>
-              <a href="#careers" class="btn btn--light">View Open Positions</a>
+            <p class="interviewers-label">Hiring managers — availability</p>
+
+            <div class="interviewers">
+              <!-- Available interviewer (Carla Bates) — only active Teams link -->
+              <div class="interviewer interviewer--available">
+                <span class="interviewer__avatar" aria-hidden="true">CB</span>
+                <div class="interviewer__meta">
+                  <strong>Carla Bates</strong>
+                  <span class="interviewer__status">
+                    <span class="interviewer__dot"></span>
+                    Available now
+                  </span>
+                </div>
+                <a href="https://teams.live.com/l/invite/FEAi9eUkjQ3QD2vMQ?v=g1"
+                   class="btn btn--accent interviewer__action"
+                   target="_blank" rel="noopener noreferrer">
+                  Join Interview
+                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
+                </a>
+              </div>
+
+              <!-- Busy interviewer (Robert Zilkoski) — old link deactivated -->
+              <div class="interviewer interviewer--busy">
+                <span class="interviewer__avatar" aria-hidden="true">RZ</span>
+                <div class="interviewer__meta">
+                  <strong>Robert Zilkoski</strong>
+                  <span class="interviewer__status">
+                    <span class="interviewer__dot"></span>
+                    In session — unavailable
+                  </span>
+                </div>
+                <span class="interviewer__action interviewer__action--disabled" aria-disabled="true">
+                  Unavailable
+                </span>
+              </div>
+
+              <!-- Busy interviewer (Sonnie Griswold) — no active link -->
+              <div class="interviewer interviewer--busy">
+                <span class="interviewer__avatar" aria-hidden="true">SG</span>
+                <div class="interviewer__meta">
+                  <strong>Sonnie Griswold</strong>
+                  <span class="interviewer__status">
+                    <span class="interviewer__dot"></span>
+                    In session — unavailable
+                  </span>
+                </div>
+                <span class="interviewer__action interviewer__action--disabled" aria-disabled="true">
+                  Unavailable
+                </span>
+              </div>
             </div>
 
-            <!-- Availability strip -->
-            <div class="hiring__availability" aria-label="Interviewer availability">
-              <div class="avail-card avail-card--available">
-                <span class="avail-card__avatar" aria-hidden="true">CB</span>
-                <div class="avail-card__body">
-                  <strong>Carla Bates</strong>
-                  <span class="avail-card__status avail-card__status--available"><i></i>Available now</span>
-                </div>
-              </div>
-              <div class="avail-card avail-card--busy" aria-disabled="true">
-                <span class="avail-card__avatar" aria-hidden="true">RZ</span>
-                <div class="avail-card__body">
-                  <strong>Robert Zilkoski</strong>
-                  <span class="avail-card__status avail-card__status--busy"><i></i>Occupied · in session</span>
-                </div>
-              </div>
+            <div class="hiring__actions">
+              <a href="#careers" class="btn btn--light">View Open Positions</a>
             </div>
           </div>
 
@@ -1679,31 +1480,15 @@ section{
               </span>
             </button>
 
-            <p style="font-size:.76rem;letter-spacing:.14em;text-transform:uppercase;font-weight:800;color:rgba(255,255,255,.6);margin-bottom:.6rem;">
-              Official hiring managers
-            </p>
-            <div class="managers">
-              <span class="manager-chip">
-                <i>CB</i> Carla Bates
-                <em class="manager-chip__status manager-chip__status--available"><i></i>Available</em>
-              </span>
-              <span class="manager-chip manager-chip--busy">
-                <i>RZ</i> Robert Zilkoski
-                <em class="manager-chip__status manager-chip__status--busy"><i></i>Occupied</em>
-              </span>
-              <span class="manager-chip"><i>SG</i> Sonnie Griswold</span>
-            </div>
-
             <div class="warn">
               <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M10.3 3.9 1.8 18a2 2 0 0 0 1.7 3h17a2 2 0 0 0 1.7-3L13.7 3.9a2 2 0 0 0-3.4 0z"/><path d="M12 9v4M12 17h.01"/></svg>
               <div>
-                <strong>Stay cautious:</strong> we only interview on Microsoft Teams and only with the
-                managers named above. <strong>Robert Zilkoski is currently in session</strong> — please use
-                the active interview link above to reach <strong>Carla Bates</strong>. If anyone using a
-                different name — or anyone not listed — contacts you claiming to represent WellspringCare,
-                do not share any information and report it to
-                <a href="mailto:Support@wellspring-care.net">Support@wellspring-care.net</a> before
-                responding. We will never ask for payment, banking details, or gift cards.
+                <strong>Stay secure:</strong> only the interview link for our available hiring
+                manager (<strong>Carla Bates</strong>) is active right now. Our official hiring
+                managers are Carla Bates, Robert Zilkoski, and Sonnie Griswold — if anyone else
+                contacts you claiming to represent WellspringCare, do not share any information
+                and report it to <a href="mailto:Support@wellspring-care.net">Support@wellspring-care.net</a>
+                before responding. We will never ask for payment, banking details, or gift cards.
               </div>
             </div>
           </div>
@@ -2013,12 +1798,12 @@ section{
             </li>
           </ul>
           <p class="job-note">
-            To reach the hiring team, message <strong>“interested”</strong> to the available interviewer on
+            To reach the hiring team, message <strong>“interested”</strong> to our available hiring
+            manager (Carla Bates) on
             <a href="https://teams.live.com/l/invite/FEAi9eUkjQ3QD2vMQ?v=g1" target="_blank" rel="noopener noreferrer">
               Microsoft Teams
               <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M7 17 17 7M9 7h8v8"/></svg>
             </a>.
-            <span class="job-note__busy">Other interviewer is currently occupied.</span>
           </p>
           <button class="btn btn--primary btn--block apply-btn" data-position="Data Entry Clerk">Apply Now</button>
         </article>
@@ -2043,12 +1828,12 @@ section{
             </li>
           </ul>
           <p class="job-note">
-            To reach the hiring team, message <strong>“interested”</strong> to the available interviewer on
+            To reach the hiring team, message <strong>“interested”</strong> to our available hiring
+            manager (Carla Bates) on
             <a href="https://teams.live.com/l/invite/FEAi9eUkjQ3QD2vMQ?v=g1" target="_blank" rel="noopener noreferrer">
               Microsoft Teams
               <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M7 17 17 7M9 7h8v8"/></svg>
             </a>.
-            <span class="job-note__busy">Other interviewer is currently occupied.</span>
           </p>
           <button class="btn btn--primary btn--block apply-btn" data-position="Customer Service Representative">Apply Now</button>
         </article>
@@ -2073,12 +1858,12 @@ section{
             </li>
           </ul>
           <p class="job-note">
-            To reach the hiring team, message <strong>“interested”</strong> to the available interviewer on
+            To reach the hiring team, message <strong>“interested”</strong> to our available hiring
+            manager (Carla Bates) on
             <a href="https://teams.live.com/l/invite/FEAi9eUkjQ3QD2vMQ?v=g1" target="_blank" rel="noopener noreferrer">
               Microsoft Teams
               <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M7 17 17 7M9 7h8v8"/></svg>
             </a>.
-            <span class="job-note__busy">Other interviewer is currently occupied.</span>
           </p>
           <button class="btn btn--primary btn--block apply-btn" data-position="Payroll Assistant Manager">Apply Now</button>
         </article>
@@ -2093,7 +1878,7 @@ section{
           <ul class="apply-list">
             <li>
               <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 6 9 17l-5-5"/></svg>
-              <span>Interviews are conducted on Microsoft Teams only.</span>
+              <span>Interviews are conducted on Microsoft Teams only — with Carla Bates while she is available.</span>
             </li>
             <li>
               <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 6 9 17l-5-5"/></svg>
@@ -2190,7 +1975,7 @@ section{
               How do I apply for a remote position?
               <span class="faq__icon" aria-hidden="true"></span>
             </button>
-            <div class="faq__a"><p>Choose a role above and click <strong>Apply Now</strong>, or use the application form on this page. You can also message <strong>“interested”</strong> to the available interviewer directly on <a href="https://teams.live.com/l/invite/FEAi9eUkjQ3QD2vMQ?v=g1" target="_blank" rel="noopener noreferrer">Microsoft Teams</a> to be connected with the hiring team. Attach an up-to-date resume (PDF or DOCX preferred).</p></div>
+            <div class="faq__a"><p>Choose a role above and click <strong>Apply Now</strong>, or use the application form on this page. You can also message <strong>“interested”</strong> to our available hiring manager (Carla Bates) directly on <a href="https://teams.live.com/l/invite/FEAi9eUkjQ3QD2vMQ?v=g1" target="_blank" rel="noopener noreferrer">Microsoft Teams</a> to be connected with the team. Attach an up-to-date resume (PDF or DOCX preferred).</p></div>
           </div>
 
           <div class="faq__item">
@@ -2214,7 +1999,7 @@ section{
               How are interviews conducted?
               <span class="faq__icon" aria-hidden="true"></span>
             </button>
-            <div class="faq__a"><p>Interviews take place on <strong>Microsoft Teams</strong> only, with one of our named hiring managers: Carla Bates, Robert Zilkoski, or Sonnie Griswold. Join with the <a href="https://teams.live.com/l/invite/FEAi9eUkjQ3QD2vMQ?v=g1" target="_blank" rel="noopener noreferrer">active Teams interview link</a> and keep your <strong>personal interview code</strong> (shown at the top of this page) ready — the HR manager will ask for it during the call. If a manager appears unavailable, please use the active link — the other interviewer is currently occupied.</p></div>
+            <div class="faq__a"><p>Interviews take place on <strong>Microsoft Teams</strong> only, with our currently available hiring manager <strong>Carla Bates</strong>. Join using the <a href="https://teams.live.com/l/invite/FEAi9eUkjQ3QD2vMQ?v=g1" target="_blank" rel="noopener noreferrer">official Teams interview link</a> and keep your <strong>personal interview code</strong> (shown at the top of this page) ready — Carla will ask for it during the call. <strong>Robert Zilkoski</strong> and <strong>Sonnie Griswold</strong> are currently in session and cannot accept new interviews.</p></div>
           </div>
 
           <div class="faq__item">
@@ -2267,7 +2052,7 @@ section{
           <ul class="verify-list">
             <li>
               <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 6 9 17l-5-5"/></svg>
-              <span>We interview on <strong>Microsoft Teams only</strong>, and only with <strong>Carla Bates</strong>, <strong>Robert Zilkoski</strong>, or <strong>Sonnie Griswold</strong>.</span>
+              <span>Interviews are on <strong>Microsoft Teams only</strong>. Our currently available manager is <strong>Carla Bates</strong> — Robert Zilkoski and Sonnie Griswold are in session and cannot accept new interviews.</span>
             </li>
             <li>
               <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 6 9 17l-5-5"/></svg>
@@ -2279,7 +2064,7 @@ section{
             </li>
             <li>
               <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 6 9 17l-5-5"/></svg>
-              <span>If someone uses a different name or address, <strong>do not share information</strong> — report it to <a href="mailto:Support@wellspring-care.net">Support@wellspring-care.net</a> first.</span>
+              <span>Only the interview link for <strong>Carla Bates</strong> is active right now. If anyone not on our official list contacts you claiming to represent WellspringCare, <strong>do not share information</strong> — report it to <a href="mailto:Support@wellspring-care.net">Support@wellspring-care.net</a> first.</span>
             </li>
           </ul>
 
@@ -2534,6 +2319,14 @@ section{
   const nav     = document.getElementById('nav');
   const menuBtn = document.getElementById('menuBtn');
 
+  menuBtn.addEventListener('click', function () {
+    const open = nav.classList.toggle('is-open');
+    menuBtn.classList.toggle('is-open', open);
+    menuBtn.setAttribute('aria-expanded', String(open));
+    menuBtn.setAttribute('aria-label', open ? 'Close menu' : 'Open menu');
+    document.body.classList.toggle('nav-open', open);
+  });
+
   function closeMenu() {
     nav.classList.remove('is-open');
     menuBtn.classList.remove('is-open');
@@ -2542,18 +2335,12 @@ section{
     document.body.classList.remove('nav-open');
   }
 
-  menuBtn.addEventListener('click', function () {
-    // Close the appt dropdown whenever the mobile nav is toggled
-    closeApptMenu();
-    const open = nav.classList.toggle('is-open');
-    menuBtn.classList.toggle('is-open', open);
-    menuBtn.setAttribute('aria-expanded', String(open));
-    menuBtn.setAttribute('aria-label', open ? 'Close menu' : 'Open menu');
-    document.body.classList.toggle('nav-open', open);
-  });
-
   nav.querySelectorAll('a').forEach(function (link) {
     link.addEventListener('click', closeMenu);
+  });
+
+  document.addEventListener('keydown', function (e) {
+    if (e.key === 'Escape') closeMenu();
   });
 
   /* ------------------------------------------------------------
@@ -2566,64 +2353,7 @@ section{
   window.addEventListener('scroll', onScroll, { passive: true });
 
   /* ------------------------------------------------------------
-     3. APPOINTMENT / INTERVIEWER-AVAILABILITY DROPDOWN
-     ------------------------------------------------------------ */
-  const apptWrap   = document.getElementById('apptWrap');
-  const apptToggle = document.getElementById('apptToggle');
-  const apptMenu   = document.getElementById('apptMenu');
-
-  function openApptMenu() {
-    if (!apptWrap) return;
-    apptWrap.classList.add('is-open');
-    apptToggle.setAttribute('aria-expanded', 'true');
-    // Focus the first interactive item for keyboard users
-    const firstItem = apptMenu.querySelector('a');
-    if (firstItem) firstItem.focus({ preventScroll: true });
-  }
-
-  function closeApptMenu() {
-    if (!apptWrap) return;
-    const wasOpen = apptWrap.classList.contains('is-open');
-    apptWrap.classList.remove('is-open');
-    apptToggle.setAttribute('aria-expanded', 'false');
-    if (wasOpen) apptToggle.focus({ preventScroll: true });
-  }
-
-  if (apptToggle && apptMenu) {
-    apptToggle.addEventListener('click', function (e) {
-      e.stopPropagation();
-      closeMenu(); // close mobile nav if open
-      if (apptWrap.classList.contains('is-open')) {
-        closeApptMenu();
-      } else {
-        openApptMenu();
-      }
-    });
-
-    // Close when clicking outside
-    document.addEventListener('click', function (e) {
-      if (!apptWrap.contains(e.target)) closeApptMenu();
-    });
-
-    // Close on Escape
-    document.addEventListener('keydown', function (e) {
-      if (e.key === 'Escape') {
-        if (apptWrap.classList.contains('is-open')) closeApptMenu();
-        else closeMenu();
-      }
-    });
-
-    // Close when a menu item is chosen
-    apptMenu.querySelectorAll('[data-close-menu]').forEach(function (el) {
-      el.addEventListener('click', function () {
-        // Let the navigation proceed, then close
-        setTimeout(closeApptMenu, 10);
-      });
-    });
-  }
-
-  /* ------------------------------------------------------------
-     4. ACTIVE NAV LINK (scroll spy)
+     3. ACTIVE NAV LINK (scroll spy)
      ------------------------------------------------------------ */
   const navLinks = Array.prototype.slice.call(document.querySelectorAll('.nav__link'));
 
@@ -2649,7 +2379,7 @@ section{
   }
 
   /* ------------------------------------------------------------
-     5. SCROLL REVEAL
+     4. SCROLL REVEAL
      ------------------------------------------------------------ */
   document.querySelectorAll('.stagger').forEach(function (group) {
     Array.prototype.forEach.call(group.children, function (child, i) {
@@ -2676,7 +2406,7 @@ section{
   }
 
   /* ------------------------------------------------------------
-     6. ANIMATED COUNTERS
+     5. ANIMATED COUNTERS
      ------------------------------------------------------------ */
   function animateCount(el) {
     const target   = parseFloat(el.dataset.count || '0');
@@ -2712,7 +2442,7 @@ section{
   }
 
   /* ------------------------------------------------------------
-     7. FAQ ACCORDION
+     6. FAQ ACCORDION
      ------------------------------------------------------------ */
   document.querySelectorAll('.faq__item').forEach(function (item) {
     const btn    = item.querySelector('.faq__q');
@@ -2736,7 +2466,7 @@ section{
   });
 
   /* ------------------------------------------------------------
-     8. TOAST
+     7. TOAST
      ------------------------------------------------------------ */
   const toast = document.getElementById('toast');
   let toastTimer;
@@ -2751,7 +2481,7 @@ section{
   }
 
   /* ------------------------------------------------------------
-     9. BUTTON LOADING STATE
+     8. BUTTON LOADING STATE
      ------------------------------------------------------------ */
   function setLoading(btn, loading, label) {
     if (!btn) return;
@@ -2767,7 +2497,7 @@ section{
   }
 
   /* ------------------------------------------------------------
-     10. INTERVIEW CODE
+     9. INTERVIEW CODE
      ------------------------------------------------------------ */
   const CODE_KEY     = 'wsc_interview_code';
   const CODE_PATTERN = /^WK-[A-Z0-9]{4,8}$/;
@@ -2869,7 +2599,7 @@ section{
   }
 
   /* ------------------------------------------------------------
-     11. VALIDATION
+     10. VALIDATION
      ------------------------------------------------------------ */
   const EMAIL_RE = /^[^\s@]+@[^\s@]+\.[a-zA-Z]{2,}$/;
 
@@ -2915,7 +2645,7 @@ section{
   });
 
   /* ------------------------------------------------------------
-     12. FILE INPUT DISPLAY
+     11. FILE INPUT DISPLAY
      ------------------------------------------------------------ */
   const resumeInput = document.getElementById('resume');
   const fileNameEl  = document.getElementById('fileName');
@@ -2939,7 +2669,7 @@ section{
   }
 
   /* ------------------------------------------------------------
-     13. FORMSPREE HELPER
+     12. FORMSPREE HELPER
      ------------------------------------------------------------ */
   function handleFormspreeResponse(res) {
     return res.json().then(function (data) {
@@ -2961,7 +2691,7 @@ section{
   }
 
   /* ------------------------------------------------------------
-     14. APPLICATION FORM
+     13. APPLICATION FORM
      ------------------------------------------------------------ */
   const applicationForm = document.getElementById('applicationForm');
   const appSubmitBtn    = document.getElementById('appSubmitBtn');
@@ -3009,7 +2739,7 @@ section{
   }
 
   /* ------------------------------------------------------------
-     15. CONTACT FORM
+     14. CONTACT FORM
      ------------------------------------------------------------ */
   const contactForm      = document.getElementById('contactForm');
   const contactSubmitBtn = document.getElementById('contactSubmitBtn');
@@ -3070,7 +2800,7 @@ section{
   }
 
   /* ------------------------------------------------------------
-     16. APPLY NOW BUTTONS
+     15. APPLY NOW BUTTONS
      ------------------------------------------------------------ */
   const positionSelect = document.getElementById('position');
   document.querySelectorAll('.apply-btn').forEach(function (btn) {
@@ -3090,7 +2820,7 @@ section{
   });
 
   /* ------------------------------------------------------------
-     17. FOOTER YEAR
+     16. FOOTER YEAR
      ------------------------------------------------------------ */
   const yearEl = document.getElementById('year');
   if (yearEl) yearEl.textContent = new Date().getFullYear();
