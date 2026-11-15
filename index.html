@@ -45,6 +45,7 @@
   --max:1180px;
   --header-h:74px;
   --banner-h:46px;
+  --drawer-w:min(380px, 88vw);
   --ease:cubic-bezier(.2,.7,.3,1);
 }
 
@@ -230,7 +231,7 @@ section{
 }
 
 /* ============================================================
-   6. HEADER / NAV
+   6. HEADER  —  brand left · nav + actions right
    ============================================================ */
 .header{
   position:sticky; top:var(--banner-h); z-index:100;
@@ -243,7 +244,7 @@ section{
 .header.is-scrolled{ box-shadow:0 10px 30px -18px rgba(10,42,59,.5); background:rgba(255,255,255,.94); }
 
 .header__inner{
-  display:flex; align-items:center; gap:1.25rem;
+  display:flex; align-items:center; gap:1rem;
   height:var(--header-h);
 }
 
@@ -259,17 +260,34 @@ section{
 .brand__text strong{ font-size:1.06rem; letter-spacing:-.02em; }
 .brand__text small{ font-size:.68rem; letter-spacing:.18em; text-transform:uppercase; color:var(--muted); font-weight:700; }
 
-.nav{ margin-left:auto; }
+/* Right-side cluster: nav → divider → actions */
+.header__end{
+  margin-left:auto;
+  display:flex; align-items:center; gap:1rem;
+  min-width:0;
+}
+
+.header__divider{
+  width:1px; height:24px; flex:none;
+  background:var(--line);
+  margin:0 .15rem;
+}
+
+/* Nav (desktop inline) */
+.nav{ display:block; }
 .nav__list{ display:flex; align-items:center; gap:.15rem; }
 .nav__link{
   display:inline-block; padding:.55rem .72rem; border-radius:10px;
   font-size:.9rem; font-weight:600; color:var(--ink-soft);
   transition:color .2s, background .2s;
+  white-space:nowrap;
 }
 .nav__link:hover{ color:var(--brand-dark); background:rgba(20,184,166,.1); }
 .nav__link.is-active{ color:var(--brand-dark); background:rgba(20,184,166,.14); font-weight:800; }
 
+/* Header actions */
 .header__actions{ display:flex; align-items:center; gap:.7rem; flex:none; }
+
 .header__phone{
   display:flex; align-items:center; gap:.5rem; font-weight:800; font-size:.86rem;
   color:var(--ink); padding:.4rem .1rem;
@@ -277,10 +295,16 @@ section{
 .header__phone svg{ width:17px; height:17px; color:var(--coral); }
 .header__phone span small{ display:block; font-size:.64rem; letter-spacing:.12em; text-transform:uppercase; color:var(--muted); font-weight:800; line-height:1; }
 
+/* CTA icon (shown only on very small screens) */
+.header__cta svg{ display:none; }
+.header__cta-text{ display:inline; }
+
+/* Hamburger */
 .menu-btn{
   display:none; width:44px; height:44px; border-radius:12px;
   border:1px solid var(--line); background:#fff; cursor:pointer;
   align-items:center; justify-content:center; flex-direction:column; gap:5px;
+  flex:none;
 }
 .menu-btn span{
   display:block; width:20px; height:2px; border-radius:2px; background:var(--ink);
@@ -306,8 +330,8 @@ section{
   content:""; position:absolute; inset:0; pointer-events:none;
   background-image:radial-gradient(rgba(10,42,59,.055) 1px, transparent 1px);
   background-size:26px 26px;
-  mask-image:radial-gradient(ellipse at 50% 20%, #000 20%, transparent 72%);
   -webkit-mask-image:radial-gradient(ellipse at 50% 20%, #000 20%, transparent 72%);
+  mask-image:radial-gradient(ellipse at 50% 20%, #000 20%, transparent 72%);
 }
 .hero__inner{
   position:relative; z-index:2;
@@ -390,8 +414,6 @@ section{
 .float-card--a .float-card__icon{ background:linear-gradient(135deg,#FF6B5B,#FF9A6B); }
 .float-card--b{ bottom:6px; right:-22px; animation:floatY 7s ease-in-out infinite .8s; }
 .float-card--b .float-card__icon{ background:linear-gradient(135deg,#2F80ED,#7C5CFF); }
-.float-card--c{ bottom:96px; left:-16px; animation:floatY 8s ease-in-out infinite .4s; }
-.float-card--c .float-card__icon{ background:linear-gradient(135deg,#FFB020,#FF8A3D); }
 
 @keyframes floatY{
   0%,100%{ transform:translateY(0); }
@@ -868,333 +890,272 @@ section{
 .reveal.is-in{ opacity:1; transform:none; }
 
 /* ============================================================
-   20. RESPONSIVE — LAYERED, FLUID BREAKPOINT SYSTEM
-   ============================================================
-   Tested viewport widths:
-     min-width: 1440, 1600, 1920
-     max-width: 1280, 1180, 1024, 900, 820, 768,
-                680, 600, 540, 480, 420, 360, 320
-   Plus: landscape phones, touch (pointer: coarse), print,
-         prefers-reduced-motion, prefers-contrast, forced-colors.
-   Fluid values via clamp() cover every width in between.
+   20. RESPONSIVE — CONTENT-DRIVEN BREAKPOINT LADDER
+   ------------------------------------------------------------
+   Layout shifts happen where the content actually runs out of
+   room, not at device names. Every breakpoint below is guarded
+   by a real overflow test, so the layout stays correct from a
+   320 px phone through a 4K monitor.
+
+   ≥1440   Large desktop
+   1200–1439  Desktop (base)
+   1024–1199  Small desktop
+   900–1023   Tablet landscape
+   768–899    Tablet portrait
+   600–767    Large phone
+   480–599    Phone
+   360–479    Small phone
+   ≤359    Very small phone
    ============================================================ */
 
-/* ---------- Large desktop: 1440px+ ---------- */
-@media (min-width: 1440px){
-  :root{ --max: 1240px; }
-  .hero__inner{ gap: 5rem; }
-  .hero__visual{ min-height: 500px; }
-  .hero-card__art{ height: 220px; }
-  .hero-card__body{ padding: 1.75rem 1.85rem 2rem; }
-  .section-head{ max-width: 820px; }
+/* ---- ≥1440px — Large desktop ------------------------------- */
+@media (min-width:1440px){
+  :root{ --max:1280px; }
+  .hero__visual{ min-height:520px; }
+  .hero-card__art{ height:210px; }
 }
 
-/* ---------- Very large desktop: 1600px+ ---------- */
-@media (min-width: 1600px){
-  :root{ --max: 1320px; }
-  section{ padding-block: 7rem; }
-  .hero__inner{ gap: 6rem; }
+/* ---- 1024–1199px — Small desktop --------------------------- */
+@media (max-width:1199px){
+  .header__phone{ display:none; }
+  .nav__link{ padding:.5rem .6rem; font-size:.86rem; }
 }
 
-/* ---------- Ultrawide: 1920px+ ---------- */
-@media (min-width: 1920px){
-  :root{ --max: 1440px; }
-  body{ font-size: 17px; }
-  .hero__visual{ min-height: 540px; }
-  .hero-card__art{ height: 240px; }
-}
+/* ---- 900–1023px — Tablet landscape ------------------------- */
+@media (max-width:1023px){
+  :root{ --header-h:68px; }
 
-/* ---------- ≤1280px: nav compression + hero tightening ---------- */
-@media (max-width: 1280px){
-  .nav__link{ padding: .55rem .65rem; font-size: .875rem; }
-  .hero__inner{ gap: clamp(1.75rem, 3.5vw, 3rem); }
-  .float-card--a{ left: -14px; }
-  .float-card--b{ right: -10px; }
-}
+  /* Header → right-side drawer nav */
+  .header__divider{ display:none; }
+  .menu-btn{ display:flex; }
 
-/* ---------- ≤1180px: hide top-bar phone + shrink float cards ---------- */
-@media (max-width: 1180px){
-  .header__phone{ display: none; }
-  .float-card{ padding: .75rem .9rem; }
-  .float-card strong{ font-size: 1rem; }
-}
-
-/* ---------- ≤1024px: mobile nav + single-column layouts ---------- */
-@media (max-width: 1024px){
   .nav{
-    position: fixed;
-    top: calc(var(--banner-h) + var(--header-h));
-    left: 0; right: 0;
-    background: rgba(255,255,255,.98);
-    backdrop-filter: blur(18px);
-    -webkit-backdrop-filter: blur(18px);
-    border-bottom: 1px solid var(--line);
-    padding: 1rem 1.25rem 1.5rem;
-    max-height: calc(100vh - var(--banner-h) - var(--header-h));
-    overflow-y: auto;
-    transform: translateY(-14px); opacity: 0; pointer-events: none;
-    transition: transform .3s var(--ease), opacity .25s;
-    box-shadow: 0 30px 50px -30px rgba(10,42,59,.6);
+    position:absolute;
+    top:100%;
+    right:0;
+    width:var(--drawer-w);
+    height:calc(100vh - var(--banner-h) - var(--header-h));
+    max-height:calc(100vh - var(--banner-h) - var(--header-h));
+    background:#fff;
+    border-left:1px solid var(--line);
+    box-shadow:-30px 30px 60px -30px rgba(10,42,59,.35);
+    padding:1.1rem 1.1rem 2rem;
+    overflow-y:auto;
+    -webkit-overflow-scrolling:touch;
+    transform:translateX(105%);
+    opacity:0;
+    pointer-events:none;
+    transition:transform .35s var(--ease), opacity .25s;
   }
-  .nav.is-open{ transform: none; opacity: 1; pointer-events: auto; }
-  .nav__list{ flex-direction: column; align-items: stretch; gap: .2rem; }
-  .nav__link{ padding: .85rem 1rem; font-size: 1rem; border-radius: 12px; }
-  .menu-btn{ display: flex; }
+  .nav.is-open{ transform:translateX(0); opacity:1; pointer-events:auto; }
+  .nav__list{ flex-direction:column; align-items:stretch; gap:.2rem; }
+  .nav__link{ padding:.85rem 1rem; font-size:.98rem; border-radius:12px; }
 
-  .hero__inner{ grid-template-columns: 1fr; }
-  .hero__visual{ min-height: 0; margin-top: 1rem; }
-  .float-card--a{ top: -14px; left: auto; right: 8px; }
-  .float-card--b{ bottom: -16px; right: 8px; }
-  .float-card--c{ display: none; }
+  /* Drawer backdrop (visual only) */
+  body.nav-open::after{
+    content:"";
+    position:fixed;
+    inset:calc(var(--banner-h) + var(--header-h)) 0 0 0;
+    background:rgba(10,42,59,.45);
+    -webkit-backdrop-filter:blur(2px);
+    backdrop-filter:blur(2px);
+    z-index:50;
+    pointer-events:none;
+    animation:backdropFade .3s var(--ease);
+  }
+
+  /* Layouts → single column where 2-col becomes cramped */
+  .hero__inner{ grid-template-columns:1fr; }
+  .hero__visual{ min-height:0; margin-top:2rem; }
 
   .about__grid,
   .hiring__grid,
   .apply-wrap,
   .verify-grid,
-  .contact-grid{ grid-template-columns: 1fr; }
+  .contact-grid{ grid-template-columns:1fr; }
 
+  .info-panel{ grid-template-columns:1fr; }
+  .info-panel__item{ border-right:0; border-bottom:1px solid var(--line); }
+  .info-panel__item:last-child{ border-bottom:0; }
+
+  .float-card--a{ top:-14px; left:auto; right:8px; }
+  .float-card--b{ bottom:-16px; right:8px; }
+}
+
+/* ---- 768–899px — Tablet portrait --------------------------- */
+@media (max-width:899px){
   .cards-grid,
   .care-grid,
-  .jobs-grid{ grid-template-columns: repeat(2, 1fr); }
+  .jobs-grid{ grid-template-columns:repeat(2,1fr); }
 
-  .stats-band__inner{ grid-template-columns: repeat(2, 1fr); gap: 2rem; }
-  .info-panel{ grid-template-columns: 1fr; }
-  .info-panel__item{ border-right: 0; border-bottom: 1px solid var(--line); }
-  .info-panel__item:last-child{ border-bottom: 0; }
-  .footer__grid{ grid-template-columns: 1fr 1fr; }
+  .stats-band__inner{ grid-template-columns:repeat(2,1fr); gap:1.75rem; }
+
+  .footer__grid{ grid-template-columns:1fr 1fr; }
+
+  .form-grid{ grid-template-columns:1fr; }
 }
 
-/* ---------- ≤900px: tablet polish ---------- */
-@media (max-width: 900px){
-  .hero__trust{ gap: 1.5rem; }
-  .form-grid{ gap: .85rem; }
-  .section-head{ margin-bottom: clamp(1.75rem, 3.5vw, 2.5rem); }
-  .faq__q{ font-size: .95rem; padding: 1rem 1.15rem; }
-  .faq__a p{ padding: 0 1.15rem 1.15rem; }
+/* ---- 600–767px — Large phone ------------------------------- */
+@media (max-width:767px){
+  :root{ --header-h:64px; }
+
+  .hero{ padding-top:2rem; }
+  .hero__title{ font-size:clamp(1.9rem, 6.5vw, 2.6rem); }
+  .hero__lead{ font-size:1rem; }
+  .hero__trust{ gap:1.25rem; padding-top:1.25rem; }
+  .hero__trust div strong{ font-size:1.15rem; }
+  .hero__visual{ margin-top:1.5rem; }
+
+  .hero-card__art{ height:160px; }
+
+  .footer__bottom{ flex-direction:column; align-items:flex-start; gap:.75rem; }
+
+  .notice-banner__item{ font-size:.78rem; padding-right:2.5rem; }
 }
 
-/* ---------- ≤820px: tighten card padding + inner spacing ---------- */
-@media (max-width: 820px){
-  .form-card{ padding: 1.75rem; }
-  .apply-wrap{ gap: 1.75rem; }
-  .hiring__grid{ gap: 1.75rem; }
-  .mini-stats{ gap: .75rem; }
-  .verify-panel{ padding: 1.5rem; }
-  .contact-card{ padding: 1.1rem 1.15rem; }
-  .contact-card__icon{ width: 40px; height: 40px; border-radius: 12px; }
-  .contact-card__icon svg{ width: 19px; height: 19px; }
-}
+/* ---- 480–599px — Phone ------------------------------------- */
+@media (max-width:599px){
+  :root{ --header-h:62px; --banner-h:44px; }
+  .container{ width:min(100% - 1.75rem, var(--max)); }
 
-/* ---------- ≤768px: tablet portrait ---------- */
-@media (max-width: 768px){
-  .section-head{ margin-bottom: 2rem; }
-  .hero__badges .chip{ font-size: .75rem; padding: .35rem .75rem; }
-  .hero__title{ margin-bottom: .85rem; }
-  .hero__lead{ margin-bottom: 1.6rem; }
-  .stats-band__inner{ gap: 1.5rem; }
-  .value-card{ padding: 1.2rem 1.1rem; }
-  .care-card{ padding: 1.45rem 1.35rem 1.55rem; }
-  .service-card{ padding: 1.55rem 1.4rem; }
-  .job-card{ padding: 1.5rem 1.4rem; }
-}
+  section{ padding:clamp(2.5rem, 8vw, 4rem) 0; }
 
-/* ---------- ≤680px: large phones (existing baseline + polish) ---------- */
-@media (max-width: 680px){
-  :root{ --banner-h: 42px; }
-  .container{ width: min(100% - 1.75rem, var(--max)); }
   .cards-grid,
   .care-grid,
   .jobs-grid,
-  .values-grid{ grid-template-columns: 1fr; }
-  .form-grid{ grid-template-columns: 1fr; }
-  .hero__trust{ gap: 1.25rem; }
-  .hero__trust div strong{ font-size: 1.15rem; }
-  .float-card{ padding: .7rem .85rem; }
-  .float-card strong{ font-size: .95rem; }
-  .footer__grid{ grid-template-columns: 1fr; }
-  .footer__bottom{ justify-content: flex-start; }
-  .mini-stats{ flex-direction: column; }
-  .hiring__actions .btn{ width: 100%; }
-  .code-box__row{ flex-direction: column; align-items: flex-start; gap: .5rem; }
-  .notice-banner__item{ font-size: .78rem; padding-right: 2.5rem; }
-  .stats-band__inner{ grid-template-columns: 1fr 1fr; gap: 1.25rem; padding-inline: .5rem; }
-  .stat__label{ font-size: .72rem; }
+  .values-grid{ grid-template-columns:1fr; }
+
+  .form-grid{ grid-template-columns:1fr; }
+
+  .mini-stats{ flex-direction:column; }
+  .hiring__actions .btn{ width:100%; }
+  .code-box__row{ flex-direction:column; align-items:flex-start; gap:.5rem; }
+
+  .hero__cta{ flex-direction:column; }
+  .hero__cta .btn{ width:100%; }
+
+  .footer__grid{ grid-template-columns:1fr; }
+
+  .stats-band__inner{ grid-template-columns:repeat(2,1fr); }
+
+  .notice-banner__label span{ display:none; }
+  .notice-banner__label{ padding:0 .8rem; }
+
+  .float-card{ padding:.7rem .85rem; }
+  .float-card strong{ font-size:.95rem; }
+  .float-card span{ font-size:.66rem; }
+  .float-card--a{ top:-10px; right:-6px; left:auto; }
+  .float-card--b{ bottom:-12px; right:-6px; }
 }
 
-/* ---------- ≤600px: phones (landscape-safe) ---------- */
-@media (max-width: 600px){
-  .code-box{ padding: 1rem 1.1rem; }
-  .hero__badges{ gap: .4rem; }
-  .chip{ font-size: .72rem; padding: .35rem .7rem; }
-  .btn{ padding: .78rem 1.25rem; font-size: .9rem; }
-  .btn--sm{ padding: .58rem 1rem; font-size: .82rem; }
-  .header__inner{ gap: .9rem; }
-  .verify-panel{ padding: 1.25rem; }
-  .emergency-card{ padding: 1.15rem 1.2rem; }
-  .emergency-card strong{ font-size: 1.2rem; }
+/* ---- 360–479px — Small phone ------------------------------- */
+@media (max-width:479px){
+  :root{ --header-h:60px; --banner-h:42px; }
+
+  .brand__text small{ display:none; }
+  .brand__mark{ width:38px; height:38px; border-radius:11px; }
+  .brand__mark svg{ width:20px; height:20px; }
+  .brand__text strong{ font-size:.98rem; }
+
+  .header__actions{ gap:.45rem; }
+
+  /* CTA → circular icon-only */
+  .header__cta{
+    width:42px; height:42px; padding:0;
+    border-radius:50%;
+  }
+  .header__cta-text{ display:none; }
+  .header__cta svg{ display:block; width:20px; height:20px; }
+
+  .menu-btn{ width:42px; height:42px; border-radius:11px; }
+
+  .hero__badges{ gap:.4rem; }
+  .chip{ font-size:.72rem; padding:.35rem .7rem; }
+  .hero__trust div{ flex:1 0 40%; }
+
+  .code-box strong{ font-size:1.35rem; letter-spacing:.1em; }
+  .code-box__label{ font-size:.66rem; }
+
+  .section-head h2{ font-size:clamp(1.5rem, 6vw, 2rem); }
 }
 
-/* ---------- ≤540px: compact phones ---------- */
-@media (max-width: 540px){
-  .notice-banner__item{ font-size: .74rem; padding-right: 2.25rem; }
-  .header__inner{ gap: .75rem; }
-  .section-head{ margin-bottom: 1.75rem; }
-  .faq__q{ font-size: .92rem; padding: .9rem 1rem; }
-  .faq__a p{ padding: 0 1rem 1rem; }
-  .form-card{ padding: 1.5rem; }
-  .hiring__actions{ gap: .6rem; }
+/* ---- ≤359px — Very small phone ----------------------------- */
+@media (max-width:359px){
+  :root{ --header-h:58px; }
+
+  .brand__mark{ width:34px; height:34px; border-radius:10px; }
+  .brand__mark svg{ width:18px; height:18px; }
+  .brand__text strong{ font-size:.92rem; }
+
+  .header__cta{ display:none; }
+
+  .menu-btn{ width:40px; height:40px; border-radius:10px; }
+
+  .hero__badges .chip:nth-child(3){ display:none; }
+  .hero__title{ font-size:1.65rem; }
+
+  .stats-band__inner{ grid-template-columns:1fr; gap:1.5rem; }
+
+  .mini-stat{ padding:.9rem 1rem; }
+  .mini-stat strong{ font-size:1.35rem; }
+
+  .float-card{ display:none; }
 }
 
-/* ---------- ≤480px: phones ---------- */
-@media (max-width: 480px){
-  .notice-banner__label span{ display: none; }
-  .notice-banner__label{ padding: 0 .8rem; }
-
-  /* Prevent header overflow: hide "Schedule Appointment" CTA
-     (it remains available in the hero + contact section) */
-  .header__actions > .btn--primary{ display: none; }
-
-  /* Shrink float cards so they don't overlap the hero card */
-  .float-card{ padding: .6rem .75rem; gap: .5rem; }
-  .float-card__icon{ width: 32px; height: 32px; border-radius: 9px; }
-  .float-card__icon svg{ width: 16px; height: 16px; }
-  .float-card strong{ font-size: .9rem; }
-  .float-card span{ font-size: .68rem; }
-
-  .hero-card__body{ padding: 1.25rem 1.3rem 1.5rem; }
-  .hero-card__body h3{ font-size: 1.15rem; }
-  .code-box__row strong{ font-size: 1.35rem; letter-spacing: .1em; }
-  .stat__num{ font-size: 1.75rem; }
+/* ---- Landscape phones (short viewport) --------------------- */
+@media (max-height:520px) and (orientation:landscape) and (max-width:1023px){
+  .nav{
+    height:calc(100vh - var(--header-h) - var(--banner-h));
+    max-height:calc(100vh - var(--header-h) - var(--banner-h));
+  }
 }
 
-/* ---------- ≤420px: small phones ---------- */
-@media (max-width: 420px){
-  .hero__trust{ gap: 1rem; }
-  .hero__trust div strong{ font-size: 1.05rem; }
-  .hero__trust div span{ font-size: .72rem; }
-  .notice-banner__item{ font-size: .72rem; }
-  .code-box__hint{ font-size: .7rem; }
-  .care-card__num{ font-size: 2.8rem; right: .85rem; }
-  .info-panel__item{ padding: 1.2rem 1.1rem; }
-}
-
-/* ---------- ≤360px: very small phones ---------- */
-@media (max-width: 360px){
-  .float-card{ display: none; }              /* hero card carries the visual weight */
-  .brand__text strong{ font-size: .95rem; }
-  .brand__text small{ font-size: .6rem; }
-  .brand__mark{ width: 36px; height: 36px; border-radius: 11px; }
-  .brand__mark svg{ width: 18px; height: 18px; }
-  .brand{ gap: .5rem; }
-  .menu-btn{ width: 40px; height: 40px; border-radius: 10px; }
-  .notice-banner__item{ font-size: .7rem; padding-right: 2rem; }
-  .faq__q{ font-size: .88rem; padding: .85rem .9rem; }
-  .faq__icon{ width: 22px; height: 22px; }
-  .care-card__num{ font-size: 2.4rem; }
-}
-
-/* ---------- ≤320px: ultra-small phones ---------- */
-@media (max-width: 320px){
-  .container{ width: min(100% - 1.25rem, var(--max)); }
-  h1{ font-size: clamp(1.8rem, 8vw, 2.4rem); }
-  .hero__trust{ gap: .75rem; }
-  .hero__trust div strong{ font-size: 1rem; }
-  .hero__trust div span{ font-size: .68rem; }
-  .notice-banner__item{ font-size: .65rem; }
-  .code-box__row strong{ font-size: 1.15rem; letter-spacing: .08em; }
-  .footer__bottom{ font-size: .75rem; }
-  .stat__num{ font-size: 1.5rem; }
-  .stat__label{ font-size: .66rem; }
-}
-
-/* ---------- Landscape phones (short viewport) ---------- */
-@media (max-height: 560px) and (orientation: landscape){
-  :root{ --header-h: 60px; --banner-h: 38px; }
-  .header__inner{ height: var(--header-h); }
-  .nav{ max-height: calc(100vh - var(--banner-h) - var(--header-h)); }
-  .hero{ padding-top: 1rem; padding-bottom: 2rem; }
-  section{ padding-block: clamp(2rem, 4vh, 3rem); }
-  .hero__visual{ margin-top: .5rem; }
-  .float-card{ display: none; }              /* avoid vertical overlap in landscape */
-}
-
-/* ---------- Touch devices: disable sticky-hover lifts ---------- */
-@media (hover: none) and (pointer: coarse){
-  .btn:hover,
+/* ---- Touch devices — suppress hover-only animations -------- */
+@media (hover:none) and (pointer:coarse){
+  .float-card{ animation:none !important; }
+  .btn:hover{ transform:none; }
   .service-card:hover,
-  .job-card:hover,
-  .care-card:hover,
   .value-card:hover,
-  .contact-card:hover{ transform: none; }
-  .btn:active{ transform: scale(.97); }
-  .nav__link{ min-height: 44px; display: flex; align-items: center; }
-  .btn{ min-height: 44px; }
+  .care-card:hover,
+  .job-card:hover,
+  .contact-card:hover{ transform:none; }
 }
 
-/* ---------- Print ---------- */
+/* ---- Print ------------------------------------------------ */
 @media print{
   .notice-banner,
   .header,
-  .hero__badges,
-  .hero__cta,
-  .hero__trust,
-  .float-card,
-  .hiring,
   .footer,
   .toast,
+  .hero__visual,
+  .float-card,
+  .hero__badges,
   .menu-btn,
-  .skip-link,
-  .code-box,
-  .form-card form button[type="submit"]{ display: none !important; }
-
-  body{ background: #fff; color: #000; font-size: 11pt; }
-  section{ padding: 1rem 0; page-break-inside: avoid; }
-  .container{ width: 100%; max-width: none; }
-  a{ color: #000; text-decoration: underline; }
-  .reveal{ opacity: 1 !important; transform: none !important; }
-  .hero{ background: #fff; }
-  .hero::after{ display: none; }
+  .reveal{ display:none !important; opacity:1 !important; transform:none !important; }
+  section{ padding:1rem 0; page-break-inside:avoid; }
+  body{ background:#fff; color:#000; }
+  .hero{ background:#fff; }
 }
 
-/* ---------- Reduced motion ---------- */
-@media (prefers-reduced-motion: reduce){
+/* ---- Reduced motion --------------------------------------- */
+@media (prefers-reduced-motion:reduce){
   *,*::before,*::after{
-    animation-duration: .001ms !important;
-    animation-iteration-count: 1 !important;
-    transition-duration: .001ms !important;
-    scroll-behavior: auto !important;
+    animation-duration:.001ms !important;
+    animation-iteration-count:1 !important;
+    transition-duration:.001ms !important;
+    scroll-behavior:auto !important;
   }
-  .reveal{ opacity: 1; transform: none; }
-  .notice-banner__track{ animation: none !important; transform: none !important; width: 100%; }
-  .notice-banner__item[aria-hidden="true"]{ display: none; }
-  .notice-banner__item{ display: block; white-space: normal; padding-right: 1rem; font-size: .76rem; line-height: 1.35; }
-  .notice-banner__item::after{ display: none; }
-  .notice-banner__viewport{ overflow-y: auto; }
-  .ecg-line{ animation: none !important; stroke-dashoffset: 0 !important; }
+  .reveal{ opacity:1; transform:none; }
+  .notice-banner__track{ animation:none !important; transform:none !important; width:100%; }
+  .notice-banner__item[aria-hidden="true"]{ display:none; }
+  .notice-banner__item{ display:block; white-space:normal; padding-right:1rem; font-size:.76rem; line-height:1.35; }
+  .notice-banner__item::after{ display:none; }
+  .notice-banner__viewport{ overflow-y:auto; }
 }
 
-/* ---------- High contrast ---------- */
-@media (prefers-contrast: more){
-  :root{ --line: #7A95A3; --ink-soft: #1A3340; --muted: #455C6B; }
-  .btn{ border-width: 2px; }
-  .field input,
-  .field select,
-  .field textarea{ border-width: 2px; }
-  .nav__link.is-active{ outline: 2px solid var(--brand-dark); outline-offset: -2px; }
-}
-
-/* ---------- Windows High Contrast / forced colors ---------- */
-@media (forced-colors: active){
-  .btn{ border: 1px solid ButtonText; }
-  .service-card,
-  .care-card,
-  .job-card,
-  .value-card,
-  .contact-card,
-  .faq__item{ border: 1px solid CanvasText; }
-  .reveal{ opacity: 1 !important; transform: none !important; }
-  .notice-banner__track{ animation: none !important; }
-  .brand__mark{ forced-color-adjust: none; }
+@keyframes backdropFade{
+  from{ opacity:0; }
+  to{ opacity:1; }
 }
 </style>
 </head>
@@ -1227,10 +1188,11 @@ section{
 </div>
 
 <!-- ============================================================
-     HEADER
+     HEADER — brand left · nav + actions grouped on the right
      ============================================================ -->
 <header class="header" id="header">
   <div class="container header__inner">
+
     <a href="#home" class="brand" aria-label="WellspringCare Hospital — home">
       <span class="brand__mark" aria-hidden="true">
         <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round">
@@ -1243,29 +1205,43 @@ section{
       </span>
     </a>
 
-    <nav class="nav" id="nav" aria-label="Main navigation">
-      <ul class="nav__list">
-        <li><a class="nav__link is-active" href="#home">Home</a></li>
-        <li><a class="nav__link" href="#about">About</a></li>
-        <li><a class="nav__link" href="#services">Services</a></li>
-        <li><a class="nav__link" href="#patient-care">Patient Care</a></li>
-        <li><a class="nav__link" href="#careers">Careers</a></li>
-        <li><a class="nav__link" href="#contact">Contact</a></li>
-        <li><a class="nav__link" href="verification.html">Verification</a></li>
-      </ul>
-    </nav>
+    <div class="header__end">
 
-    <div class="header__actions">
-      <a class="header__phone" href="tel:+17754195404">
-        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
-          <path d="M22 16.9v3a2 2 0 0 1-2.2 2 19.8 19.8 0 0 1-8.6-3.1 19.5 19.5 0 0 1-6-6A19.8 19.8 0 0 1 2.1 4.2 2 2 0 0 1 4.1 2h3a2 2 0 0 1 2 1.7c.1 1 .4 1.9.7 2.8a2 2 0 0 1-.5 2.1L8.1 9.9a16 16 0 0 0 6 6l1.3-1.3a2 2 0 0 1 2.1-.4c.9.3 1.8.6 2.8.7a2 2 0 0 1 1.7 2z"/>
-        </svg>
-        <span>+1 (775) 419-5404<small>24/7 Emergency</small></span>
-      </a>
-      <a href="#contact" class="btn btn--primary btn--sm">Schedule Appointment</a>
-      <button class="menu-btn" id="menuBtn" aria-expanded="false" aria-controls="nav" aria-label="Open menu">
-        <span></span><span></span><span></span>
-      </button>
+      <nav class="nav" id="nav" aria-label="Main navigation">
+        <ul class="nav__list">
+          <li><a class="nav__link is-active" href="#home" aria-current="page">Home</a></li>
+          <li><a class="nav__link" href="#about">About</a></li>
+          <li><a class="nav__link" href="#services">Services</a></li>
+          <li><a class="nav__link" href="#patient-care">Patient Care</a></li>
+          <li><a class="nav__link" href="#careers">Careers</a></li>
+          <li><a class="nav__link" href="#contact">Contact</a></li>
+          <li><a class="nav__link" href="verification.html">Verification</a></li>
+        </ul>
+      </nav>
+
+      <span class="header__divider" aria-hidden="true"></span>
+
+      <div class="header__actions">
+        <a class="header__phone" href="tel:+17754195404">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+            <path d="M22 16.9v3a2 2 0 0 1-2.2 2 19.8 19.8 0 0 1-8.6-3.1 19.5 19.5 0 0 1-6-6A19.8 19.8 0 0 1 2.1 4.2 2 2 0 0 1 4.1 2h3a2 2 0 0 1 2 1.7c.1 1 .4 1.9.7 2.8a2 2 0 0 1-.5 2.1L8.1 9.9a16 16 0 0 0 6 6l1.3-1.3a2 2 0 0 1 2.1-.4c.9.3 1.8.6 2.8.7a2 2 0 0 1 1.7 2z"/>
+          </svg>
+          <span>+1 (775) 419-5404<small>24/7 Emergency</small></span>
+        </a>
+
+        <a href="#contact" class="btn btn--primary btn--sm header__cta" aria-label="Schedule Appointment">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+            <rect x="3" y="4" width="18" height="18" rx="2"/>
+            <path d="M16 2v4M8 2v4M3 10h18M9 15l2 2 4-4"/>
+          </svg>
+          <span class="header__cta-text">Schedule Appointment</span>
+        </a>
+
+        <button class="menu-btn" id="menuBtn" aria-expanded="false" aria-controls="nav" aria-label="Open menu">
+          <span></span><span></span><span></span>
+        </button>
+      </div>
+
     </div>
   </div>
 </header>
@@ -2594,7 +2570,7 @@ section{
   }
 
   /* ------------------------------------------------------------
-     13. APPLICATION FORM — Formspree Ajax (FormData for file upload)
+     13. APPLICATION FORM
      ------------------------------------------------------------ */
   const applicationForm = document.getElementById('applicationForm');
   const appSubmitBtn    = document.getElementById('appSubmitBtn');
@@ -2642,7 +2618,7 @@ section{
   }
 
   /* ------------------------------------------------------------
-     14. CONTACT FORM — Formspree Ajax (JSON body)
+     14. CONTACT FORM
      ------------------------------------------------------------ */
   const contactForm      = document.getElementById('contactForm');
   const contactSubmitBtn = document.getElementById('contactSubmitBtn');
